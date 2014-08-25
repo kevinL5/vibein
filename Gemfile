@@ -3,12 +3,14 @@ source 'https://rubygems.org'
 
 ruby '2.1.2'
 
-
-
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'devise'
+gem 'figaro', '~> 1.0.0.rc1'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem 'koala'
+gem 'omniauth-facebook'
 gem 'pg'
 gem 'rails', '4.1.4'
 gem 'rails_12factor'

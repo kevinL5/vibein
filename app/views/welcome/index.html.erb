@@ -1,0 +1,132 @@
+<img src="images/background.png" id="bg" alt="Background">
+
+  <div id="nav-brand">
+    <h2>VIBE IN</h2>
+    <p>music embellishes the world</p>
+  </div>
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-7">
+          <div id="presentation">
+            <h1>SAUVEGARDER </br>& PARTAGER</br>
+            <span>vos coups de coeur musicaux</span></h1>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-md-offset-1">
+          <div class="connect text-center">
+
+            <h3>Rejoindre la communauté</h3>
+
+            </br>
+
+            <img class="border-50" width="60" src="images/jan.jpg">
+            <img class="border-50" width="60" src="images/greer.jpg">
+            <img class="border-50" width="60" src="images/sidney.jpg">
+            <img class="border-50" width="60" src="images/taylor.jpg">
+            <img class="border-50" width="60" src="images/nico.jpg">
+            <img class="border-50" width="60" src="images/harlow.jpg">
+
+            </br></br></br>
+
+
+            <%= link_to "Sign in with Facebook", omniauth_authorize_path(:user, :facebook) %>
+
+            <a id="fb-connect" href="#">
+              <img src="images/fb-connect.png" width="190" alt="FacebookConnect">
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="list-inline text-center">
+            <li>
+              <button class="btn btn-footer" data-toggle="modal" data-target="#myModalWho">
+                Who we are ?
+              </button>
+             </li>
+
+            <li>
+              <button class="btn btn-footer" data-toggle="modal" data-target="#myModalWe">
+                We respect your privacy
+              </button>
+            </li>
+
+            <li>
+              <button class="btn btn-footer" data-toggle="modal" data-target="#myModalUs">
+                Contact us
+              </button>
+            </li>
+          </ul>
+
+          <div class="modal fade" id="myModalWho" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Who we are ?</h4>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModalWe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">We respct your privacy</h4>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModalUs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Contact Us</h4>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+  </footer>
