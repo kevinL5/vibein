@@ -2,43 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.welcome-name {
-  color: rgb(252, 98, 34);
-  padding-top: 15px;
-  padding-right: 15px;
+.aside {
+  height: 90%;
+  background-color: beige;
 }
 
-.welcome-photo {
-  padding-top: 5px;
-  margin-right: 15px;
-  border-radius: 50%;
+.music-table {
+  background-color: #FFF;
+  margin-top: 85px;
+  padding: 15px 0 0 15px;
+  border: 0.5px solid rgb(252,98,34);
 }
 
-.flow-aside {
-  margin-top:90px;
-  border-radius: 5px;
-}
-
-.flow img {
+.music-table img {
   float: left;
   border-radius: 3px;
   margin-bottom: 20px;
 }
 
-.flow h3, .flow h4 {
+.music-table h3, .music-table h4 {
   padding-left: 200px;
 }
 
-.flow h3 {
+.music-table h3 {
   font-size: 18px;
 }
 
-.flow h4 {
+.music-table h4 {
   font-size: 14px;
   font-weight: lighter;
-}
-
-.aside {
-  height: 90%;
-  background-color: beige;
 }

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provider: MyText
+  identification: MyText
+  title: MyText
+  uploader: MyText
+  duration: 1
+  uploaded: 2014-08-26 12:04:26
+
+two:
+  provider: MyText
+  identification: MyText
+  title: MyText
+  uploader: MyText
+  duration: 1
+  uploaded: 2014-08-26 12:04:26
