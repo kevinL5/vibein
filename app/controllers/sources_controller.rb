@@ -3,11 +3,15 @@ class SourcesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @sources = Source.all
+    @user = current_user
+    @sources = @user.sources !!!!!!!!!!!!!!!
     @source = Source.new
   end
 
   def show
+    @user = current_user
+    @sources = @user.sources !!!!!!!!!!!!!!!!!
+    @source = Source.find(params[:id])
   end
 
   def create
@@ -24,6 +28,8 @@ class SourcesController < ApplicationController
     @source.picture = video.thumbnail_large
 
     @source.save
+
+    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
 
     redirect_to sources_path
   end

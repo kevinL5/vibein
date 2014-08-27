@@ -2,10 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.aside {
-  height: 90%;
-  background-color: beige;
-}
+/* Index */
+
 
 .music-table {
   background-color: #FFF;
@@ -21,7 +19,7 @@
 }
 
 .music-table h3, .music-table h4 {
-  padding-left: 200px;
+  padding-left: 160px;
 }
 
 .music-table h3 {
@@ -30,5 +28,37 @@
 
 .music-table h4 {
   font-size: 14px;
+  font-weight: lighter;
+}
+
+/* Show */
+
+.player {
+  padding-top: 100px;
+}
+
+.music-list {
+  overflow: scroll;
+  height: 85%;
+  border: solid rgb(252, 98, 34) 1px;
+}
+
+.music-list img {
+  float: left;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.music-list h3, .music-list h4 {
+  padding-left: 140px;
+}
+
+.music-list h3 {
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+.music-list h4 {
+  font-size: 12px;
   font-weight: lighter;
 }

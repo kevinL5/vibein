@@ -2,20 +2,22 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">
-        <!-- <img height="25" src="images/Logo_Vibe_In.png"> --> VIBE IN
-      </a>
+        <%= link_to 'VIBE IN', welcome_index_path, :class => "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="playlist.html">Playlist</a></li>
+        <li><%= link_to 'Home', welcome_index_path %></li>
+        <li class="active"><%= link_to 'Playlist', sources_path %></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="disconnect"><a href="index.html"><i class="fa fa-power-off"></i></a></li>
+        <li class="disconnect">
+            <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fa fa-power-off"></i>
+          <% end %>
+        </li>
       </ul>
 
       <form class="navbar-form navbar-right" role="search">
@@ -36,7 +38,7 @@
       <div class="player">
         <div class="col-sm-7">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="//www.youtube-nocookie.com/embed/bLHxYvazSmc?vq=hd720"></iframe>
+            <iframe src="//www.youtube-nocookie.com/embed/<%=@source.identification%>?vq=hd720"></iframe>
           </div>
         </div>
       </div>
@@ -46,21 +48,19 @@
         <div class="row">
           <div class="music-list">
 
-            <ul class="list-unstyled">
-              <li><div class="col-sm-12">
-                <img width="120" src="images/maxmusic.jpg" >
+            <ul class="list-unstyled"><% @sources.each do |source| %>
+              <li>
+                <div class="col-sm-12">
+                  <%= link_to source_path(source) do %>
+                    <%= image_tag source.picture.url(:thumb) %>
+                  <% end %>
 
-                  <h3>FlicFlac - Hope 12345 67890</h3>
-                  <h4>Electro posé</h4>
-              </div></li>
+                <h3><%= link_to source.title, source_path(source) %></h3>
+                <h4>Duration in seconds: <%= source.duration %></h4>
 
-              <li><div class="col-sm-12">
-                <img width="120" src="images/maxmusic.jpg" >
-
-                  <h3>FlicFlac - Hope</h3>
-                  <h4>Electro posé</h4>
-              </div></li>
-            </ul>
+              </li>
+                <% end %>
+              </ul>
 
           </div>
         </div>
