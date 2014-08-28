@@ -18,6 +18,7 @@ gem 'rails', '4.1.4'
 gem 'rails_12factor'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'soundcloud'
 gem 'thin'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'

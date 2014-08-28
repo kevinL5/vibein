@@ -38,7 +38,7 @@
       <div class="player">
         <div class="col-sm-7">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="//www.youtube-nocookie.com/embed/<%=@source.identification%>?vq=hd720"></iframe>
+            <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
           </div>
         </div>
       </div>

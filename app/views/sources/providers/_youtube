@@ -1,0 +1,3 @@
+<iframe id="ytplayer" type="text/html"
+src="https://www.youtube-nocookie.com/embed/<%=@source.identification%>?vq=hd720&autoplay=1&modestbranding=1&color=white&iv_load_policy=3&theme=light"
+frameborder="0" allowfullscreen></iframe>

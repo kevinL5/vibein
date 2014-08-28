@@ -4,20 +4,39 @@ class SourcesController < ApplicationController
 
   def index
     @user = current_user
-    @sources = @user.sources !!!!!!!!!!!!!!!
+    @sources = @user.sources
     @source = Source.new
   end
 
   def show
     @user = current_user
-    @sources = @user.sources !!!!!!!!!!!!!!!!!
+    @sources = @user.sources
     @source = Source.find(params[:id])
+
   end
 
   def create
 
     @source = Source.new
+    @url = params[:url]
 
+    if @url[/^(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?([\w-]{10,})/]
+      create_youtube
+    elsif @url[/^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/]
+      create_soundcloud
+    else
+      create_link
+    end
+
+    redirect_to sources_path
+  end
+
+  def destroy
+  end
+
+  private
+
+  def create_youtube
     video = VideoInfo.new(params[:url])
 
     @source.provider = video.provider
@@ -29,15 +48,32 @@ class SourcesController < ApplicationController
 
     @source.save
 
+    music_create
+  end
+
+  def create_soundcloud
+    client = Soundcloud.new(:client_id => '7eda384a44d761c3108c153a6f9daa85')
+    track = client.get('/resolve', :url => @url)
+
+    @source.provider = "Soundcloud"
+    @source.identification = track.id
+    @source.title = track.title
+    @source.uploader = track.user.username
+    @source.duration = track.duration
+    @source.uploaded = track.date
+    @source.picture = track.user.avatar_url
+
+    @source.save
+
+    music_create
+  end
+
+  def create_link
+  end
+
+  def music_create
     Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
-
-    redirect_to sources_path
   end
-
-  def destroy
-  end
-
-  private
 
   def source_params
     params.require(:source).permit(:provider, :identification, :title, :uploader, :duration, :uploaded, :picture)
