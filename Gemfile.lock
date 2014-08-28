@@ -179,6 +179,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    textacular (3.2.0)
+      activerecord (>= 3.0, < 4.2)
     thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
@@ -189,8 +191,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.3.0)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -227,7 +227,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   soundcloud
   spring
+  textacular (~> 3.0)
   thin
-  turbolinks
   uglifier (>= 1.3.0)
   video_info

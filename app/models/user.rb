@@ -24,4 +24,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  def music_for(source)
+    musics.where(source: source).first
+  end
 end

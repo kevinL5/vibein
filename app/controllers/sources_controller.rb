@@ -4,8 +4,14 @@ class SourcesController < ApplicationController
 
   def index
     @user = current_user
-    @sources = @user.sources
     @source = Source.new
+
+    if params[:search] && params[:search].length >= 1
+      @sources = @user.sources.basic_search(title: params[:search])
+    else
+      @sources = @user.sources
+    end
+
   end
 
   def show
@@ -29,9 +35,6 @@ class SourcesController < ApplicationController
     end
 
     redirect_to sources_path
-  end
-
-  def destroy
   end
 
   private
@@ -59,7 +62,7 @@ class SourcesController < ApplicationController
     @source.identification = track.id
     @source.title = track.title
     @source.uploader = track.user.username
-    @source.duration = track.duration
+    @source.duration = track.duration / 1000
     @source.uploaded = track.date
     @source.picture = track.user.avatar_url
 
