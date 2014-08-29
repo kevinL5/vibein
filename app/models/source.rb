@@ -5,9 +5,8 @@ class Source < ActiveRecord::Base
     through: :musics
 
   has_attached_file :picture,
-    styles: { medium: "100x100^>", thumb: "100x70^>" }
+    styles: { medium: "100x100^>", thumb: "70^x70>" }
 
   validates_attachment_content_type :picture,
     content_type: /\Aimage\/.*\z/
-
 end

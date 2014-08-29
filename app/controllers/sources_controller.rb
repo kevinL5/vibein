@@ -5,11 +5,13 @@ class SourcesController < ApplicationController
   def index
     @user = current_user
     @source = Source.new
+    @category = Category.new
 
     if params[:search] && params[:search].length >= 1
-      @sources = @user.sources.basic_search(title: params[:search])
+      sources = @user.sources.basic_search(title: params[:search])
+      @musics = @user.musics.where(source_id: sources.map(&:id))
     else
-      @sources = @user.sources
+      @musics = @user.musics
     end
 
   end
@@ -18,7 +20,6 @@ class SourcesController < ApplicationController
     @user = current_user
     @sources = @user.sources
     @source = Source.find(params[:id])
-
   end
 
   def create
@@ -30,8 +31,6 @@ class SourcesController < ApplicationController
       create_youtube
     elsif @url[/^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/]
       create_soundcloud
-    else
-      create_link
     end
 
     redirect_to sources_path
@@ -69,9 +68,6 @@ class SourcesController < ApplicationController
     @source.save
 
     music_create
-  end
-
-  def create_link
   end
 
   def music_create

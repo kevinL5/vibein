@@ -88,43 +88,26 @@
           </div>
 
           <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
-            <li><%= link_to category.title %></li>
+            <li><%= category.title %></li>
             <% end %>
           </ul>
 
-         <ul class="list-unstyled"><% @musics.reverse.each do |music| %>
+         <ul class="list-unstyled"><% @sources.reverse.each do |source| %>
           <li>
             <div class="col-sm-12 col-md-6">
-              <%= link_to music.source do %>
-                <%= image_tag music.source.picture.url(:medium) %>
+              <%= link_to source_path(source) do %>
+                <%= image_tag source.picture.url(:medium) %>
               <% end %>
-            <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), music.source %></h3>
 
-            <% music.categories.each do |c|%>
-              <p><%= c.title %></p>
-            <% end %>
+            <h3><%= link_to truncate(source.title, length: 50, separator: ' '), source_path(source) %></h3>
             <h4>
-              <% time = music.source.duration.to_i %>
-              <%= time.divmod(60).join(':') %>
-
-              <%= link_to music, method: :delete do %>
+              <% time = source.duration.to_i %>
+              <%= time.divmod(60)[0] %>min<%= time.divmod(60)[1] %>
+              <%= link_to current_user.music_for(source), method: :delete do %>
                 <i class="fa fa-times"></i>
               <% end %>
-
-              <div class="popover-markup">
-                <button class="btn btn-default trigger" data-placement='down'>
-                  <i class="fa fa-th-list"></i>
-                </button>
-                <div class="head hide">Add a new song</div>
-                <div class="content hide">
-                  <ul class="list-unstyled"><% current_user.categories.each do |category| %>
-                    <li><%= link_to category.title, categorizations_path(music_id: music.id, category_id: category.id), :method => :post %></li>
-                    <% end %>
-                  </ul>
-                </div>
-                <div class="footer hide">test</div>
-              </div>
             </h4>
+
           </li>
             <% end %>
           </ul>

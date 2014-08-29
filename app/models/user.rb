@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
   has_many :sources,
     through: :musics
 
+  has_many :categories
+
+  has_many :categorizations,
+    through: :categories
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -24,7 +29,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def music_for(source)
-    musics.where(source: source).first
-  end
 end
