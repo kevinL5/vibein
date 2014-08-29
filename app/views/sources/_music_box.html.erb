@@ -1,0 +1,39 @@
+<div class="col-xs-12 col-md-6">
+    <div class="row">
+      <div class="col-xs-4">
+        <%= link_to music.source do %>
+          <%= image_tag music.source.picture.url(:medium), width: "100%" %>
+        <% end %>
+      </div>
+      <div class="col-xs-8">
+        <h3>
+          <%= link_to truncate(music.source.title, length: 50, separator: ' '), music.source %>
+          <%= link_to music, method: :delete do %>
+            <i class="fa fa-times"></i>
+          <% end %>
+        </h3>
+
+        <div id="categories_<%= music.id%>">
+          <%= render partial: "categories", locals: {music: music} %>
+        </div>
+
+        <h4>
+          <% time = music.source.duration.to_i %>
+          <%= time.divmod(60).join(':') %>
+        </h4>
+        <div class="popover-markup">
+          <button class="btn btn-default trigger" data-placement='down'>
+            <i class="fa fa-th-list"></i>
+          </button>
+          <div class="head hide">Add a new song</div>
+          <div class="content hide">
+            <ul class="list-unstyled"><% current_user.categories.each do |category| %>
+              <li><%= link_to category.title, categorizations_path(music_id: music.id, category_id: category.id), :method => :post, remote: true %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="footer hide">test</div>
+        </div>
+      </div>
+    </div>
+</div>

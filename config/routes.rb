@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :musics, only: [:destroy]
 
-  resources :categorizations, only: [:create]
+  resources :categorizations, only: [:create, :destroy]
 
   resources :categories, only: [:create]
 
