@@ -6,6 +6,7 @@ class CategorizationsController < ApplicationController
 
     @music.categorizations.create({category_id: params[:category_id]})
 
+
     respond_with do |format|
       format.html { redirect_to sources_path }
       format.js { render "subscription" }

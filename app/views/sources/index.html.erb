@@ -1,83 +1,41 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <%= link_to 'VIBE IN', welcome_index_path, :class => "navbar-brand" %>
-    </div>
+require 'json'
+require 'open-uri'
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Home', welcome_index_path %></li>
-        <li class="active"><%= link_to 'Playlist', sources_path %></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li style="position: inherit;">
-          <div class="popover-markup">
-            <button class="btn btn-default btn-add trigger" data-placement='left'>
-              <i class="fa fa-plus"></i>
-            </button>
-            <div class="head hide">Add a new song</div>
-            <div class="content hide">
-
-              <%= form_for @source do |f| %>
-                  <div class="form-group">
-                    <%= label_tag :url %>
-                    <%= text_field_tag :url, '', :class => 'form-control', :placeholder => "Enter url here" %>
-                  </div>
-                <%= f.submit "Submit", :class => 'btn btn-default btn-block' %>
-              <% end %>
-
-            </div>
-            <div class="footer hide">test</div>
-          </div>
-        </li>
-
-        <li class="disconnect">
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="fa fa-power-off"></i>
-          <% end %>
-        </li>
-      </ul>
-
-      <form class="navbar-form navbar-right" role="search" action="/sources" method="GET">
-        <div class="form-group">
-          <input name="search" type="text" class="form-control search-navbar" placeholder="Tracks, Artist, Channel, ...">
-        </div>
-        <button type="submit" class="btn btn-default btn-search"><i class="fa fa-search"></i></button>
-      </form>
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+<%= render partial: "navbar" %>
 
 <div class="vertical-spacer"></div>
 
 <div class="container">
+  <div class="music-table">
+
     <div class="row">
-      <button class="btn btn-primary" data-toggle="modal" data-target="#myModalPlaylist">
-        Create a new playlist ?
+      <button class="btn-create-playlist" data-toggle="modal" data-target="#myModalPlaylist">
+        Create a new playlist
       </button>
       <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
-        <li><%= link_to category.title %></li>
+        <li>
+          <%= link_to category.title, category_path(id: category.id) %>
+          <%= link_to category_path(id: category.id), method: :delete do %>
+        <i class="fa fa-times"></i>
+      <% end %>
+        </li>
         <% end %>
       </ul>
     </div>
-</div>
 
-<div class="container">
-<% @musics.reverse.each_slice(2) do |musics| %>
-  <div class="row">
 
-    <% (0..1).each do |i| %>
-      <% if musics[i] %>
-        <%= render partial: "music_box", locals: {music: musics[i]} %>
-      <% end %>
+
+    <% @musics.reverse.each_slice(2) do |musics| %>
+      <div class="row">
+        <% (0..1).each do |i| %>
+          <% if musics[i] %>
+            <%= render partial: "music_box", locals: {music: musics[i]} %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
 
   </div>
-<% end %>
 </div>
 
 <div class="modal fade" id="myModalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

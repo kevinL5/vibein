@@ -1,13 +1,13 @@
 <div class="col-xs-12 col-md-6">
   <div class="row">
     <div class="col-xs-4">
-      <%= link_to music.source do %>
-        <%= image_tag music.source.picture.url(:medium), width: "100%", class: 'music-image' %>
+      <%= link_to music do %>
+        <%= image_tag music.picture.url(:medium), width: "100%", class: 'music-image' %>
       <% end %>
     </div>
     <div class="col-xs-8">
       <h3 class="music-title">
-        <%= link_to truncate(music.source.title, length: 50, separator: ' '), music.source %>
+        <%= link_to truncate(music.title, length: 50, separator: ' '), music %>
         <%= link_to music, method: :delete do %>
           <i class="fa fa-times"></i>
         <% end %>
@@ -16,7 +16,7 @@
       <ul class="list-unstyle list-inline">
         <li>
           <h4>
-            <% time = music.source.duration.to_i %>
+            <% time = music.duration.to_i %>
             <%= time.divmod(60).join(':') %>
           </h4>
         </li>
