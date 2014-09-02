@@ -10,8 +10,7 @@ class CategoriesController < ApplicationController
 
   def create
     if current_user.categories.length < 5
-      category_attributes = category_params.merge(thumbnail: "color")
-      current_user.categories.create(category_attributes)
+      current_user.categories.create(category_params)
     end
     redirect_to sources_path
   end

@@ -4,10 +4,10 @@
 
 /* Index */
 
-
 .music-table {
   padding: 10px 5px;
   border: 0.5px solid rgb(252,98,34);
+  min-height: 600px;
 }
 
 .music-image {
@@ -37,13 +37,45 @@
 .btn-add-playlist {
   background-color: #FFF;
   border: 1px solid rgb(252,98,34);
-  border-radius: 50%;
   color: rgb(252,98,34);
 }
 
 .music-title {
   margin-bottom: 2px;
 }
+
+.btn-category {
+  color: #FFF;
+}
+
+
+/* Modal */
+
+.color-selector {
+  height: 3px;
+  width: 500px;
+}
+
+.color-1DD2AF {
+  background-color: #1DD2AF;
+}
+
+.color-2BBE68 {
+  background-color: #2BBE68;
+}
+
+.color-2E8DCC {
+  background-color: #2E8DCC;
+}
+
+.color-F1C40F {
+  background-color: #F1C40F;
+}
+
+.color-EA6153 {
+  background-color: #EA6153;
+}
+
 
 /* Show */
 
@@ -53,8 +85,10 @@
 
 .music-list {
   overflow: scroll;
-  height: 85%;
-  border: solid rgb(252, 98, 34) 1px;
+  height: 600px;
+  margin-right: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-left: -15px;
 }
 
 .music-list img {

@@ -1,6 +1,3 @@
-require 'json'
-require 'open-uri'
-
 <%= render partial: "navbar" %>
 
 <div class="vertical-spacer"></div>
@@ -16,23 +13,18 @@ require 'open-uri'
         <li>
           <%= link_to category.title, category_path(id: category.id) %>
           <%= link_to category_path(id: category.id), method: :delete do %>
-        <i class="fa fa-times"></i>
-      <% end %>
+            <i class="fa fa-times"></i>
+          <% end %>
         </li>
         <% end %>
       </ul>
     </div>
 
 
-
-    <% @musics.reverse.each_slice(2) do |musics| %>
-      <div class="row">
-        <% (0..1).each do |i| %>
-          <% if musics[i] %>
-            <%= render partial: "music_box", locals: {music: musics[i]} %>
-          <% end %>
-        <% end %>
-      </div>
+    <% if @musics.length == 0 %>
+      <%= render partial: "music_start" %>
+    <% else %>
+      <%= render partial: "music_container" %>
     <% end %>
 
   </div>
@@ -47,17 +39,42 @@ require 'open-uri'
           <h4 class="modal-title" id="myModalLabel">Create a new playlist</h4>
         </div>
         <div class="modal-body">
-          <%= form_for @category do |f| %>
-            <%= f.label :title %>
-            <%= f.text_field :title %>
+          <ul class="list-unstyled">
+            <%= form_for @category do |f| %>
 
-            <%= f.submit %>
-          <% end %>
+            <h3>Select a title</h3>
+            <li>
+              <%= f.text_field :title %>
+            </li></br>
 
+            <h3>Select a color to identified your playlist</h3>
+
+            <li>
+              <%= f.radio_button :thumbnail, "1DD2AF" %>
+              <%= label "", nil, class: "color-selector color-1DD2AF" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "2BBE68" %>
+              <%= label "", nil, class: "color-selector color-2BBE68" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "2E8DCC" %>
+              <%= label "", nil, class: "color-selector color-2E8DCC" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "F1C40F" %>
+              <%= label "", nil, class: "color-selector color-F1C40F" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "EA6153" %>
+              <%= label "", nil, class: "color-selector color-EA6153" %>
+            </li>
+
+          </ul>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Create</button>
+          <%= f.submit "Let's go !", :class => "btn btn-default" %>
+          <% end %>
         </div>
       </div>
     </div>

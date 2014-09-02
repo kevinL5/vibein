@@ -11,8 +11,10 @@
  * file per style scope.
  *
  *= require_self
- *= require navbar
+ *= require categories
+ *= require categorizations
  *= require musics
+ *= require navbar
  *= require sources
  *= require welcome
  */

@@ -2,9 +2,10 @@ Rails.application.routes.draw do
 
   root 'welcome#connect'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
-  resources :welcome, only: [:index]
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :sources, only: [:index, :show, :create]
 

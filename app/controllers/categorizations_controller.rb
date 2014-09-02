@@ -1,11 +1,9 @@
 class CategorizationsController < ApplicationController
-  respond_to :js
+ respond_to :js
 
   def create
     @music = Music.find(params[:music_id])
-
     @music.categorizations.create({category_id: params[:category_id]})
-
 
     respond_with do |format|
       format.html { redirect_to sources_path }
