@@ -9,6 +9,8 @@
         <div class="embed-responsive embed-responsive-16by9">
           <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
         </div>
+
+        <div class="fb-share-button" data-href="http://localhost:3000/sources/<%= @source.id %>/public"></div>
       </div>
     </div>
 
@@ -16,24 +18,9 @@
     <div class="col-sm-5">
       <div class="row">
         <div class="music-list">
-
-          <ul class="list-unstyled"><% @sources.reverse.each do |source| %>
-            <li>
-              <div class="col-sm-12">
-                <%= link_to source_path(source) do %>
-                  <%= image_tag source.picture.url(:thumb) %>
-                <% end %>
-
-              <h3><%= link_to truncate(source.title, length: 50, separator: ' '), source_path(source) %></h3>
-              <h4>
-                <% time = source.duration.to_i %>
-                <%= time.divmod(60)[0] %>:<%= time.divmod(60)[1] %>
-              </h4>
-
-            </li>
-              <% end %>
-            </ul>
-
+          <div id="musics_aside">
+            <%= render partial: "sources/musics_aside", locals: {sources: @sources} %>
+          </div>
         </div>
       </div>
     </div>

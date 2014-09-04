@@ -21,7 +21,7 @@
             <div class="head hide">Add a new song</div>
             <div class="content hide">
 
-              <%= form_for @source do |f| %>
+              <%= form_for(@source) do |f| %>
                   <div class="form-group">
                     <%= label_tag :url %>
                     <%= text_field_tag :url, '', :class => 'form-control', :placeholder => "Enter url here" %>
@@ -41,7 +41,7 @@
         </li>
       </ul>
 
-      <form class="navbar-form navbar-right" role="search" action="/sources" method="GET">
+      <form class="navbar-form navbar-right" role="search" action="/sources/<%= @source.id %>" method="GET" <%= @source.id ? 'data-remote="true"' : '' %>>
         <div class="form-group">
           <input name="search" type="text" class="form-control search-navbar" placeholder="Tracks, Artist, Channel, ...">
         </div>

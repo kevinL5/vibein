@@ -1,0 +1,3 @@
+<li>
+  <%= link_to category.title, categorization_path(music.categorizations.where(category_id: category.id).first), :method => :delete, remote: true, class: "delete" %>
+</li>

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :sources, only: [:index, :show, :create]
+  resources :sources, only: [:index, :show, :create] do
+    resources :public, only: [:index]
+  end
 
   resources :musics, only: [:destroy]
 

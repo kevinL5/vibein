@@ -1,0 +1,16 @@
+<ul class="list-unstyled"><% @musics.reverse.each do |music| %>
+  <li>
+    <div class="col-sm-12">
+      <%= link_to source_path(music.source) do %>
+        <%= image_tag music.source.picture.url(:thumb) %>
+      <% end %>
+
+    <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
+    <h4>
+      <% time = music.source.duration.to_i %>
+      <%= time.divmod(60)[0] %>:<%= time.divmod(60)[1] %>
+    </h4>
+
+  </li>
+    <% end %>
+</ul>

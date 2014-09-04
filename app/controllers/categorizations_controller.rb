@@ -12,8 +12,9 @@ class CategorizationsController < ApplicationController
   end
 
   def destroy
-    Categorization.find(params[:id]).destroy
-    @music = Music.find(params[:music_id])
+    categorization = Categorization.find(params[:id])
+    @music = categorization.music
+    categorization.destroy
 
     respond_with do |format|
       format.html { redirect_to sources_path }

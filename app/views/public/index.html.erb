@@ -1,0 +1,26 @@
+<% content_for :head do %>
+  <meta property="og:title" content="<%= @source.title %>" />
+  <meta property="og:type" content="Hello" />
+  <meta property="og:url" content="http://localhost:3000/sources/<%= @source.id %>/public" />
+  <meta property="og:image" content="http://example.com/image.jpg" />
+  <meta property="og:description" content="Bonjour" />
+  <meta property="og:site_name" content="Vibe In" />
+  <meta property="fb:admins" content="1466696496940225" />
+<% end %>
+
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="player">
+      <div class="col-sm-8 col-sm-2-offset">
+        <div class="embed-responsive embed-responsive-16by9">
+          <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
+        </div>
+
+        <div class="fb-share-button" data-href="http://localhost:3000/sources/<%= @source.id %>/public"></div>
+      </div>
+    </div>
+
+  </div>
+</div>

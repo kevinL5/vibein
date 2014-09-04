@@ -9,8 +9,6 @@ $(document).ready(function() {
     },
   });
 
-  $('[data-toggle="popover"]').popover();
-
   $('body').on('click', function (e) {
       $('[data-toggle="popover"]').each(function () {
           //the 'is' for buttons that trigger popups

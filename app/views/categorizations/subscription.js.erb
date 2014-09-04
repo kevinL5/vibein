@@ -1,1 +1,12 @@
 $("#categories_<%= @music.id %>").html("<%= j render partial: 'sources/categories', locals: {music: @music} %>")
+$("#popover_<%= @music.id %>").html("<%= j render partial: 'sources/popover', locals: {music: @music} %>")
+
+$('.popover-markup>.trigger').popover({
+  html: true,
+  title: function () {
+      return $(this).parent().find('.head').html();
+  },
+  content: function () {
+      return $(this).parent().find('.content').html();
+  },
+});

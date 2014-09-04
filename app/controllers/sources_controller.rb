@@ -1,6 +1,6 @@
 class SourcesController < ApplicationController
-
   before_action :authenticate_user!
+  respond_to :js
 
   def index
 
@@ -19,8 +19,23 @@ class SourcesController < ApplicationController
 
   def show
     @user = current_user
-    @sources = @user.sources
     @source = Source.find(params[:id])
+
+    if params[:search]
+      if params[:search].length >= 1
+        sources = @user.sources.basic_search(title: params[:search])
+        @musics = @user.musics.where(source_id: sources.map(&:id))
+      else
+        @musics = @user.musics
+      end
+
+      respond_with do |format|
+        format.html { redirect_to source_path(@source.id) }
+        format.js { render "musics_aside" }
+      end
+    else
+      @musics = @user.musics
+    end
   end
 
   def create
@@ -35,6 +50,7 @@ class SourcesController < ApplicationController
     end
 
     redirect_to sources_path
+
   end
 
   private

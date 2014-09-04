@@ -22,18 +22,8 @@
         </li>
 
         <li>
-          <div class="popover-markup">
-            <button class="btn btn-add-playlist trigger" data-toggle="popover" data-placement='bottom'>
-              P
-            </button>
-            <div class="head hide">Add to a playlist</div>
-            <div class="content hide">
-              <ul class="list-unstyled"><% current_user.categories.each do |category| %>
-                <li><%= link_to category.title, categorizations_path(music_id: music.id, category_id: category.id), :method => :post, remote: true %></li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="footer hide">test</div>
+          <div id="popover_<%= music.id%>" class="popover-markup">
+            <%= render partial: "popover", locals: {music: music} %>
           </div>
         </li>
 
