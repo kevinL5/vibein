@@ -1,38 +1,40 @@
 <div class="col-xs-12 col-md-6">
-  <div class="row">
-    <div class="col-xs-4">
-      <%= link_to music.source do %>
-        <%= image_tag music.source.picture.url(:medium), width: "100%", class: 'music-image' %>
-      <% end %>
-    </div>
-    <div class="col-xs-8">
-      <h3 class="music-title">
-        <%= link_to truncate(music.source.title, length: 50, separator: ' '), music.source %>
-        <%= link_to music, method: :delete do %>
-          <i class="fa fa-times"></i>
+  <div class="music-box">
+    <div class="row">
+      <div class="col-xs-4">
+        <%= link_to music.source do %>
+          <%= image_tag music.source.picture.url(:medium), width: "100%", class: 'music-image' %>
         <% end %>
-      </h3>
+      </div>
+      <div class="col-xs-8">
+        <h3 class="music-title">
+          <%= link_to truncate(music.source.title, length: 50, separator: ' '), music.source %>
+          <%= link_to music, method: :delete do %>
+            <i class="fa fa-times"></i>
+          <% end %>
+        </h3>
 
-      <ul class="list-unstyle list-inline">
-        <li>
-          <h4>
-            <% time = music.source.duration.to_i %>
-            <%= time.divmod(60).join(':') %>
-          </h4>
-        </li>
+        <ul class="list-unstyle list-inline">
+          <li>
+            <h4>
+              <% time = music.source.duration.to_i %>
+              <%= time.divmod(60).join(':') %>
+            </h4>
+          </li>
 
-        <li>
-          <div id="popover_<%= music.id%>" class="popover-markup">
-            <%= render partial: "popover", locals: {music: music} %>
-          </div>
-        </li>
+          <li>
+            <div id="popover_<%= music.id%>" class="popover-markup">
+              <%= render partial: "popover", locals: {music: music} %>
+            </div>
+          </li>
 
-        <li>
-          <div id="categories_<%= music.id%>">
-            <%= render partial: "categories", locals: {music: music} %>
-          </div>
-        </li>
-      </ul>
+          <li>
+            <div id="categories_<%= music.id%>">
+              <%= render partial: "categories", locals: {music: music} %>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

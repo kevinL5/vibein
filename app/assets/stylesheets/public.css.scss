@@ -1,3 +1,31 @@
 // Place all the styles related to the public controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.nav-brand-public > h2 {
+  padding: 30px 0 0 50px;
+  font-size: 20px;
+  color: rgb(232, 98, 34);
+  text-shadow: 1px 1px 10px black;
+}
+
+.nav-brand-public > p {
+  padding-left: 50px;
+  font-size: 12px;
+  color: rgb(232, 98, 34);
+  text-shadow: 1px 1px 10px black;
+}
+
+.slogan-public {
+  font-size: 2.5em;
+  color: white;
+  text-shadow: 1px 1px 20px rgb(0, 0, 0);
+  margin-bottom: 25px;
+}
+
+#presentation h1 {
+  font-size: 3em;
+  color: white;
+  text-shadow: 1px 1px 20px rgb(0, 0, 0);
+}

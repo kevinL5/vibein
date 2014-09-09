@@ -18,5 +18,6 @@
 //= require categorizations
 //= require musics
 //= require player
+//= require public
 //= require sources
 //= require welcome

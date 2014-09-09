@@ -4,20 +4,25 @@
 
 /* Index */
 
+.music-box {
+  background-color: #FFF;
+  border: 0.5px solid rgba(230, 230, 230, 0.5);
+  box-shadow: 1px 1px 10px #E6E6E6;
+  padding: 5px 5px;
+  margin-bottom: 5px;
+}
+
 .music-table {
   padding: 10px 5px;
-  border: 0.5px solid rgb(252,98,34);
   min-height: 600px;
 }
 
 .categories-select {
-  background-color: rgb(252, 98, 34);
-  margin-top: -10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  background-color: #FFF;
+  height: 50px;
   margin-bottom: 15px;
-  margin-right: 10px;
-  margin-left: 10px;
+  border: 0.5px solid rgba(252, 98, 34, 0.5);
+  box-shadow: 1px 1px 2px rgb(252, 98, 34);
 }
 
 .categories-list {
@@ -25,20 +30,25 @@
   margin-left: 220px;
 }
 
-.categories-list > li > a {
-  color: #FFF;
-  font-size: 16px;
-  margin-right: 10px;
-}
-
 .btn-create-playlist {
   float: left;
-  margin-top: 5px;
+  margin-top: 8px;
   margin-left: 30px;
-  background-color: rgb(252,98,34) ;
-  border: 1px solid #FFF;
-  border-radius: 10px;
+  background-color: rgb(252,98,34);
+  border-radius: 20px;
   color: #FFF;
+}
+
+.btn-category {
+  margin-top: 5px;
+  margin-right: 10px;
+  border-radius: 20px;
+  color: #FFF;
+}
+
+.delete-item {
+  margin-right: 15px;
+  color: #E6E6E6;
 }
 
 .music-image {
@@ -64,10 +74,6 @@
 
 .music-title {
   margin-bottom: 2px;
-}
-
-.btn-category {
-  color: #FFF;
 }
 
 .delete {
@@ -117,8 +123,8 @@
   overflow: scroll;
   height: 600px;
   margin-right: 15px;
-  background-color: rgba(0, 0, 0, 0.1);
-  margin-left: -15px;
+  border: 0.5px solid rgba(230, 230, 230, 0.8);
+  box-shadow: 2px 2px 10px #E6E6E6;
 }
 
 .music-list img {

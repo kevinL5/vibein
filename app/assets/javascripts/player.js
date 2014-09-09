@@ -17,3 +17,16 @@ function onYouTubeIframeAPIReady() {
 function onPlayerStateChange() {
   console.log(player.getPlayerState());
 }
+
+/*
+
+SC.stream("http://api.soundcloud.com/tracks/" + trackId, {
+  onfinish: function(){
+    console.log('track finished');
+  }
+},
+  function(sound){currentTrack = sound;
+  }
+);
+
+*/

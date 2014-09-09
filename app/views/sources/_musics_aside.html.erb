@@ -1,6 +1,7 @@
 <ul class="list-unstyled"><% @musics.reverse.each do |music| %>
   <li>
     <div class="col-sm-12">
+      <a name="id<%= music.source.id %>"/>
       <%= link_to source_path(music.source) do %>
         <%= image_tag music.source.picture.url(:thumb) %>
       <% end %>
