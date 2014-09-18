@@ -115,6 +115,32 @@
 
 /* Show */
 
+
+.share-area {
+  padding: 0px 30px 10px;
+  color: rgb(59, 89, 153);
+  border: rgba(59, 89, 153, 0.8);
+  box-shadow: 1px 1px 5px rgba(59, 89, 153, 0.8)
+}
+
+.share-text-h2 {
+  padding-top: 15px;
+  font-size: 18px;
+  text-shadow: 1px 1px 1px rgba(230, 230, 230, 0.6);
+}
+
+.share-text-h3 {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(230, 230, 230, 0.6);
+}
+
+.share-text-h4 {
+  font-size: 12px;
+  color: #CDCDCD;
+  padding-top: 10px;
+}
+
 .player {
   padding-top: 100px;
 }

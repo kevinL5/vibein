@@ -17,20 +17,19 @@
         <ul class="list-unstyle list-inline">
           <li>
             <h4>
-              <% time = music.source.duration.to_i %>
-              <%= time.divmod(60).join(':') %>
+              <%= music.source.time %>
             </h4>
           </li>
 
           <li>
             <div id="popover_<%= music.id%>" class="popover-markup">
-              <%= render partial: "popover", locals: {music: music} %>
+              <%= render partial: "sources/popover", locals: {music: music} %>
             </div>
           </li>
 
           <li>
             <div id="categories_<%= music.id%>">
-              <%= render partial: "categories", locals: {music: music} %>
+              <%= render partial: "sources/categories", locals: {music: music} %>
             </div>
           </li>
         </ul>

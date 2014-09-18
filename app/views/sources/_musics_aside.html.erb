@@ -8,8 +8,7 @@
 
     <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
     <h4>
-      <% time = music.source.duration.to_i %>
-      <%= time.divmod(60)[0] %>:<%= time.divmod(60)[1] %>
+      <%= music.source.time %>
     </h4>
 
   </li>

@@ -2,7 +2,7 @@
       <div class="row">
         <% (0..1).each do |i| %>
           <% if musics[i] %>
-            <%= render partial: "music_box", locals: {music: musics[i]} %>
+            <%= render partial: "sources/music_box", locals: {music: musics[i]} %>
           <% end %>
         <% end %>
       </div>

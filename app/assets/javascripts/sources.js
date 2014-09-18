@@ -21,12 +21,14 @@ $(document).ready(function() {
 
   function scrollToAnchor(aid){
     var aTag = $("a[name='id"+ aid +"']");
-    $('.music-list').animate({scrollTop: aTag.offset().top},'slow');
+    $('.music-list').animate({scrollTop: aTag.offset().top - 70 },'fast');
   }
 
   $(".music-list").show(function() {
     var id = $('.player:first').data('source-id');
     scrollToAnchor(id);
   });
+
+
 
 });

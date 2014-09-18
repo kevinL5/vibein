@@ -1,40 +1,37 @@
-require 'json'
-require 'open-uri'
-
-<%= render partial: "navbar" %>
+<%= render partial: "sources/navbar" %>
 
 <div class="vertical-spacer"></div>
 
 <div class="container">
   <div class="music-table">
-
     <div class="row">
-      <button class="btn-create-playlist" data-toggle="modal" data-target="#myModalPlaylist">
-        Create a new playlist
-      </button>
-      <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
-        <li>
-          <%= link_to category.title, category_path(id: category.id) %>
-          <%= link_to category_path(id: category.id), method: :delete do %>
-        <i class="fa fa-times"></i>
-      <% end %>
-        </li>
-        <% end %>
-      </ul>
+      <div class="categories-select">
+        <button class="btn btn-sm btn-create-playlist" data-toggle="modal" data-target="#myModalPlaylist">
+          Create a new playlist
+        </button>
+        <ul class="list-unstyled list-inline categories-list"><% current_user.categories.each do |category| %>
+          <li>
+            <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
+            <%= link_to category_path(id: category.id), method: :delete, :class => "delete-item" do %>
+              <i class="fa fa-times"></i>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
 
-    <% @musics.reverse.each_slice(2) do |musics| %>
-      <div class="row">
-        <% (0..1).each do |i| %>
-          <% if musics[i] %>
-            <%= render partial: "music_box", locals: {music: musics[i]} %>
-          <% end %>
-        <% end %>
-      </div>
+
+    <% if @musics.length == 0 %>
+      <%= render partial: "sources/music_start" %>
+    <% else %>
+      <%= render partial: "sources/music_container" %>
     <% end %>
 
   </div>
 </div>
+
+
 
 <div class="modal fade" id="myModalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -45,17 +42,42 @@ require 'open-uri'
           <h4 class="modal-title" id="myModalLabel">Create a new playlist</h4>
         </div>
         <div class="modal-body">
-          <%= form_for @category do |f| %>
-            <%= f.label :title %>
-            <%= f.text_field :title %>
+          <ul class="list-unstyled">
+            <%= form_for @category do |f| %>
 
-            <%= f.submit %>
-          <% end %>
+            <h3>Select a title</h3>
+            <li>
+              <%= f.text_field :title %>
+            </li></br>
 
+            <h3>Select a color to identified your playlist</h3>
+
+            <li>
+              <%= f.radio_button :thumbnail, "1DD2AF" %>
+              <%= label "", nil, class: "color-selector color-1DD2AF" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "2BBE68" %>
+              <%= label "", nil, class: "color-selector color-2BBE68" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "2E8DCC" %>
+              <%= label "", nil, class: "color-selector color-2E8DCC" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "F1C40F" %>
+              <%= label "", nil, class: "color-selector color-F1C40F" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "EA6153" %>
+              <%= label "", nil, class: "color-selector color-EA6153" %>
+            </li>
+
+          </ul>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Create</button>
+          <%= f.submit "Let's go !", :class => "btn btn-default" %>
+          <% end %>
         </div>
       </div>
     </div>
