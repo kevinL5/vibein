@@ -19,9 +19,14 @@
           <% end %>
         </ul>
       </div>
-    </div>
 
-    <%= friends %>
+      <%= friends %>
+      <%= friends.size %>
+      <% friends.each do |friend| %>
+      <%= puts friend %>
+      <% end %>
+
+    </div>
 
     <% if @musics.length == 0 %>
       <%= render partial: "music_start" %>
