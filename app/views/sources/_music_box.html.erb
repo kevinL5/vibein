@@ -23,7 +23,6 @@
 
           <li>
             <div id="popover_<%= source.id%>" class="popover-markup">
-              <% fdsfs %>
               <% music = Music.where('source_id' => source.id).first %>
               <%= render partial: "sources/popover", locals: {music: music} %>
             </div>
