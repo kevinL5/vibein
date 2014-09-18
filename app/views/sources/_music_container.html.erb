@@ -1,8 +1,8 @@
-<% @musics.reverse.each_slice(2) do |musics| %>
+<% @sources.reverse.each_slice(2) do |source| %>
       <div class="row">
         <% (0..1).each do |i| %>
-          <% if musics[i] %>
-            <%= render partial: "sources/music_box", locals: {music: musics[i]} %>
+          <% if source[i] %>
+            <%= render partial: "sources/music_box", locals: {source: source[i]} %>
           <% end %>
         <% end %>
       </div>

@@ -25,6 +25,7 @@ class SourcesController < ApplicationController
       @musics = @user.musics.where(source_id: sources.map(&:id))
     else
       @musics = @user.musics
+      @sources = @user.musics.map(&:source)
     end
 
   end

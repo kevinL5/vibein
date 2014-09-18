@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
     @source = Source.new
     @category = Category.new
     category = Category.find(params[:id])
-    @musics = category.categorizations.map(&:music).map(&:source)
+    @sources = category.categorizations.map(&:music).map(&:source)
   end
 
   def create

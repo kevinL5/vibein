@@ -2,14 +2,14 @@
   <div class="music-box">
     <div class="row">
       <div class="col-xs-4">
-        <%= link_to music.source do %>
-          <%= image_tag music.source.picture.url(:medium), width: "100%", class: 'music-image' %>
+        <%= link_to source do %>
+          <%= image_tag source.picture.url(:medium), width: "100%", class: 'music-image' %>
         <% end %>
       </div>
       <div class="col-xs-8">
         <h3 class="music-title">
-          <%= link_to truncate(music.source.title, length: 50, separator: ' '), music.source %>
-          <%= link_to music, method: :delete do %>
+          <%= link_to truncate(source.title, length: 50, separator: ' '), source %>
+          <%= link_to source, method: :delete do %>
             <i class="fa fa-times"></i>
           <% end %>
         </h3>
@@ -17,19 +17,21 @@
         <ul class="list-unstyle list-inline">
           <li>
             <h4>
-              <%= music.source.time %>
+              <%= source.time %>
             </h4>
           </li>
 
           <li>
-            <div id="popover_<%= music.id%>" class="popover-markup">
+            <div id="popover_<%= source.id%>" class="popover-markup">
+              <% fdsfs %>
+              <% music = Music.where('source_id' => source.id).first %>
               <%= render partial: "sources/popover", locals: {music: music} %>
             </div>
           </li>
 
           <li>
-            <div id="categories_<%= music.id%>">
-              <%= render partial: "sources/categories", locals: {music: music} %>
+            <div id="categories_<%= source.id%>">
+              <%= render partial: "sources/categories", locals: {source: source} %>
             </div>
           </li>
         </ul>
