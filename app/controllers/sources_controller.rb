@@ -11,13 +11,14 @@ class SourcesController < ApplicationController
     @graph = Koala::Facebook::API.new(@user.token)
 
     profile = @graph.get_object("me")
-    friends = @graph.get_connections("me", "friends")
+    @friends = @graph.get_connections("me", "friends")
 
-    friends.each do |friend|
-      if Friend.where('friend_uid' => friend.uid).first == nil
-        Friend.create(user_id = current_user.uid, friend_id = friend.uid)
-      end
-    end
+
+    #@friends.each do |friend|
+      #if Friend.where('friend_uid' => friend.uid).first == nil
+        #Friend.create(user_id = current_user.uid, friend_id = friend.uid)
+      #end
+    #end
 
 
     if params[:search] && params[:search].length >= 1
