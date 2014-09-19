@@ -8,11 +8,11 @@ class SourcesController < ApplicationController
     @source = Source.new
     @category = Category.new
 
-    @graph = Koala::Facebook::API.new(@user.token)
-
-    profile = @graph.get_object("me")
-    @friends = @graph.get_connections("me", "friends")
-
+    if @user.provider == 'facebook'
+      facebook_friends
+    else
+      @friends = ['connexion classique']
+    end
 
     #@friends.each do |friend|
       #if Friend.where('friend_uid' => friend.uid).first == nil
@@ -68,6 +68,13 @@ class SourcesController < ApplicationController
   end
 
   private
+
+  def facebook_friends
+    @graph = Koala::Facebook::API.new(@user.token)
+
+    profile = @graph.get_object("me")
+    @friends = @graph.get_connections("me", "friends")
+  end
 
   def create_youtube
     video = VideoInfo.new(params[:url])
