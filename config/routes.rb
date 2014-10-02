@@ -17,7 +17,13 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:show, :create, :destroy]
 
+  resources :api, only: [:index]
+
   resources :bookmarklets, only: [:index]
+
+  resources :friends, only: [:index] do
+    resources :friendmusics, only: [:index, :show]
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

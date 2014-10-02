@@ -1,0 +1,16 @@
+<%= render partial: "sources/navbar" %>
+
+<br><br><br><br>
+
+<div class="text-center">
+  <ul class="list-unstyled list-inline"><% @friends.each do |fb_friend| %>
+    <% friend = User.where(:uid => fb_friend.friend_uid).first %>
+    <li><%= link_to friend_friendmusics_path(fb_friend.id) do %>
+      <%= image_tag friend.picture, class: 'welcome-photo' %>
+    <% end %></li>
+    <li><%= link_to friend.name, friend_friendmusics_path(fb_friend.id) %></li>
+  <% end %>
+  </ul>
+</div>
+
+

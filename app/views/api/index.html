@@ -1,0 +1,48 @@
+<%= render partial: "sources/navbar" %>
+
+<br><br><br><br>
+
+<div class="container">
+
+    <div class="music-box">
+        <div class="row">
+      <div class="col-xs-4">
+          <%= image_tag @source.picture.url(:medium), width: "100%", class: 'music-image' %>
+      </div>
+      <div class="col-xs-8">
+        <h3 class="music-title">
+          <%= truncate(@source.title, length: 50, separator: ' ', :class => 'api-song-title') %>
+          <%= link_to music_path(@source.id), method: :delete, :class => 'delete-song' do %>
+            <i class="fa fa-times"></i>
+          <% end %>
+        </h3>
+
+        <ul class="list-unstyle list-inline">
+          <li>
+            <h4>
+              <%= @source.time %>
+            </h4>
+          </li>
+
+          <% music = Music.where('source_id' => @source.id).first %>
+
+          <li>
+            <div id="popover_<%= music.id%>" class="popover-markup">
+              <%= render partial: "api/popover", locals: {music: music} %>
+            </div>
+          </li>
+
+          <li>
+            <div id="categories_<%= music.id%>">
+              <%= render partial: "sources/categories", locals: {music: music} %>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="api-success">Votre morceau a été ajouté avec succès. Vous n'avez plus qu'à le mettre dans vos playlists favorites</h2>
+
+</div>

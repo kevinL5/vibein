@@ -1,0 +1,29 @@
+<%= render partial: "friendmusics/navbar" %>
+
+<div class="vertical-spacer"></div>
+
+<div class="container">
+  <div class="music-table">
+    <div class="row">
+      <div class="categories-select">
+        <ul class="nav navbar-nav">
+          <li> <%= image_tag @friend.picture, :class => "welcome-photo" %></li>
+          <li><p class="welcome-name">Music's from <%= @friend.name %></p></li>
+        </ul>
+
+        <ul class="list-unstyled list-inline categories-list"><% @friend.categories.each do |category| %>
+          <li>
+            <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <%= render partial: "friendmusics/music_container" %>
+
+
+  </div>
+</div>

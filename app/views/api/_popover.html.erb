@@ -1,0 +1,19 @@
+<button class="btn btn-xs btn-add-playlist trigger" data-toggle="popover" data-placement='left'>
+  <i class="fa fa-bookmark-o"></i>
+</button>
+<div class="head hide">Add to a playlist</div>
+<div class="content hide">
+  <ul class="list-unstyled"><% current_user.categories.each do |category| %>
+
+    <% music = Music.find(music.id) %>
+    <% array_categorizations = music.categorizations.map(&:category_id) %>
+
+    <% if array_categorizations.include?(category.id) %>
+      <%= render partial: "sources/categorizations/delete", locals: {category: category, music: music} %>
+    <% else %>
+      <%= render partial: "sources/categorizations/create", locals: {category: category, music: music} %>
+    <% end %>
+
+  <% end %>
+  </ul>
+</div>

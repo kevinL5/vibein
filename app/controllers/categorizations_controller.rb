@@ -1,5 +1,6 @@
 class CategorizationsController < ApplicationController
- respond_to :js
+  before_action :authenticate_user!
+  respond_to :js
 
   def create
     @music = Music.find(params[:music_id])

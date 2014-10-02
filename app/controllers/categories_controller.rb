@@ -1,11 +1,15 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
 
    def show
     @user = current_user
     @source = Source.new
     @category = Category.new
     category = Category.find(params[:id])
-    @sources = category.categorizations.map(&:music).map(&:source)
+
+    if category.user_id == @user.id
+      @sources = category.categorizations.map(&:music).map(&:source)
+    end
   end
 
   def create

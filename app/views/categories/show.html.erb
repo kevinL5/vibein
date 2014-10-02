@@ -15,7 +15,7 @@
         <ul class="list-unstyled list-inline categories-list"><% current_user.categories.each do |category| %>
           <li>
             <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
-            <%= link_to category_path(id: category.id), method: :delete, :class => "delete-item" do %>
+            <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category" do %>
               <i class="fa fa-times"></i>
             <% end %>
           </li>

@@ -1,0 +1,2 @@
+module FriendmusicsHelper
+end

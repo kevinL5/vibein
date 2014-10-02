@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li> <%= image_tag current_user.picture, :class => "welcome-photo" %></li>
-        <li><p class="welcome-name"><%= notice %><%= current_user.name %></p></li>
+        <li><p class="welcome-name"><%= current_user.name %></p></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -41,7 +41,7 @@
         </li>
       </ul>
 
-      <form class="navbar-form navbar-right" role="search" action="/sources/<%= @source.id %>" method="GET" <%= @source.id ? 'data-remote="true"' : '' %>>
+      <form class="navbar-form navbar-right" role="search" action="/friends/<%= @friend.id %>/friendmusics/<%= @source.id %>" method="GET" <%= @source.id ? 'data-remote="true"' : '' %>>
         <div class="form-group">
           <input name="search" type="text" class="form-control search-navbar" placeholder="Tracks, Artist, Channel, ...">
         </div>

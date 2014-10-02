@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :friends, dependent: :destroy
+
   has_many :musics, dependent: :destroy
   has_many :sources,
     through: :musics
