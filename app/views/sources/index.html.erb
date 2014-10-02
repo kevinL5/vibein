@@ -1,6 +1,9 @@
-<%= render partial: "navbar" %>
+<%= render partial: "sources/navbar" %>
 
 <div class="vertical-spacer"></div>
+
+  <%= @profile %>
+  <%= @friends %>
 
 <div class="container">
   <div class="music-table">
@@ -9,22 +12,17 @@
         <button class="btn btn-sm btn-create-playlist" data-toggle="modal" data-target="#myModalPlaylist">
           Create a new playlist
         </button>
+
         <ul class="list-unstyled list-inline categories-list"><% current_user.categories.each do |category| %>
           <li>
             <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
-            <%= link_to category_path(id: category.id), method: :delete, :class => "delete-item" do %>
+            <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category" do %>
               <i class="fa fa-times"></i>
             <% end %>
           </li>
           <% end %>
         </ul>
       </div>
-
-      <%= @friends %>
-      <%= @friends.size %>
-      <% @friends.each do |friend| %>
-      <%= friend %>
-      <% end %>
 
     </div>
 
@@ -36,7 +34,6 @@
 
   </div>
 </div>
-
 
 
 <div class="modal fade" id="myModalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

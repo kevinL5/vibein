@@ -262,7 +262,7 @@ DEPENDENCIES
   figaro (~> 1.0.0.rc1)
   jbuilder (~> 2.0)
   jquery-rails
-  koala (~> 1.10.0rc)
+  koala
   omniauth-facebook
   paperclip
   pg

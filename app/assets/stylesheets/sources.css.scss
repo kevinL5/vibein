@@ -22,7 +22,7 @@
   height: 50px;
   margin-bottom: 15px;
   border: 0.5px solid rgba(252, 98, 34, 0.5);
-  box-shadow: 1px 1px 2px rgb(252, 98, 34);
+  box-shadow: 1px 1px 1px rgb(230, 230, 230);
 }
 
 .categories-list {
@@ -35,25 +35,49 @@
   margin-top: 8px;
   margin-left: 30px;
   background-color: rgb(252,98,34);
-  border-radius: 20px;
+  border-radius: 3px;
   color: #FFF;
+}
+
+.btn-view-all {
+  float: left;
+  margin-top: 8px;
+  margin-left: 25px;
+  margin-right: 20px;
+  background-color: #FFF;
+  border-color: rgb(252,98,34);
+  border-radius: 20px;
+  color: #000;
 }
 
 .btn-category {
   margin-top: 5px;
   margin-right: 10px;
-  border-radius: 20px;
+  border-radius: 3px;
   color: #FFF;
 }
 
-.delete-item {
+.delete-category {
+  padding-top: 5px;
   margin-right: 15px;
+  color: #E6E6E6;
+}
+
+.delete-song {
+  margin-left: 10px;
+  font-size: 16px;
   color: #E6E6E6;
 }
 
 .music-image {
   border-radius: 3px;
   margin-bottom: 7px;
+}
+
+.btn-music-category {
+  padding: 2px 5px;
+  color: #FFF;
+  border-radius: 2px;
 }
 
 .music-table h3 {
@@ -68,8 +92,9 @@
 
 .btn-add-playlist {
   background-color: #FFF;
-  border: 1px solid rgb(252,98,34);
+  border: none;
   color: rgb(252,98,34);
+  font-size: 18px;
 }
 
 .music-title {
@@ -157,11 +182,9 @@
   float: left;
   border-radius: 3px;
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
-.music-list h3, .music-list h4 {
-  padding-left: 140px;
-}
 
 .music-list h3 {
   margin-top: 7px;

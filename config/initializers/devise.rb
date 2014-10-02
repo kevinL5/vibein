@@ -3,7 +3,9 @@
 Devise.setup do |config|
 
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?
-config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"]
+
+  config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"],
+  :scope => 'email, public_profile, user_friends'
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing

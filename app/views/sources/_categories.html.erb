@@ -1,7 +1,7 @@
 <ul class="list-inline list-unstyle">
-  <% Music.where('source_id' => source.id).first.categorizations.each do |categorization|%>
+  <% music.categorizations.each do |categorization|%>
     <li>
-      <%= link_to categorization.category.title[0].upcase, categorization_path(categorization), method: :delete, remote: true, :class => "btn-sm btn-category color-#{categorization.category.thumbnail}" %>
+    <%= link_to categorization.category.title, category_path(categorization.category.id), :class => "btn-music-category color-#{categorization.category.thumbnail}" %>
     </li>
   <% end %>
 </ul>

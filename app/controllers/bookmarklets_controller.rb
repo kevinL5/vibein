@@ -1,60 +1,7 @@
-class SourcesController < ApplicationController
+class BookmarkletsController < ApplicationController
   before_action :authenticate_user!
-  respond_to :js
 
   def index
-
-    @user = current_user
-    @source = Source.new
-    @musics = @user.musics
-    @category = Category.new
-
-    if @user.provider == 'facebook'
-      facebook_friends
-    else
-      @friends = ['connexion classique']
-      @profile = ['connexion classique']
-    end
-
-    #@friends.each do |friend|
-      #if Friend.where('friend_uid' => friend.uid).first == nil
-        #Friend.create(user_id = current_user.uid, friend_id = friend.uid)
-      #end
-    #end
-
-
-    if params[:search] && params[:search].length >= 1
-      sources = @user.sources.basic_search(title: params[:search])
-      @sources = @user.musics.where(source_id: sources.map(&:id)).map(&:source)
-    else
-      @sources = @user.musics.map(&:source)
-    end
-
-  end
-
-  def show
-    @user = current_user
-    @source = Source.find(params[:id])
-
-    if params[:search]
-      if params[:search].length >= 1
-        sources = @user.sources.basic_search(title: params[:search])
-        @musics = @user.musics.where(source_id: sources.map(&:id))
-      else
-        @musics = @user.musics
-      end
-
-      respond_with do |format|
-        format.html { redirect_to source_path(@source.id) }
-        format.js { render "musics_aside" }
-      end
-    else
-      @musics = @user.musics
-    end
-  end
-
-  def create
-
     @source = Source.new
     @url = params[:url]
 
@@ -64,18 +11,11 @@ class SourcesController < ApplicationController
       create_soundcloud
     end
 
-    redirect_to sources_path
+    @source = Source.last
 
   end
 
   private
-
-  def facebook_friends
-    graph = Koala::Facebook::API.new(@user.token)
-
-    @profile = graph.get_object("me")
-    @friends = graph.get_connections("me", "friends")
-  end
 
   def create_youtube
     video = VideoInfo.new(params[:url])

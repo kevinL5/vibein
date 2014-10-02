@@ -1,16 +1,26 @@
-<ul class="list-unstyled"><% @musics.reverse.each do |music| %>
-  <li>
-    <div class="col-sm-12">
-      <a name="id<%= music.source.id %>"/>
-      <%= link_to source_path(music.source) do %>
-        <%= image_tag music.source.picture.url(:thumb) %>
+<ul class="list-unstyled">
+  <div class="row">
+    <% @musics.reverse.each do |music| %>
+    <li>
+      <div class="col-sm-12">
+        <div class="row">
+          <a id="<%= music.source.id %>"/>
+
+          <div class="col-sm-4 col-md-3">
+            <%= link_to source_path(music.source) do %>
+              <%= image_tag music.source.picture.url(:thumb) %>
+            <% end %>
+          </div>
+
+          <div class="col-sm-8 col-md-7">
+            <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
+            <h4>
+              <%= music.source.time %>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </li>
       <% end %>
-
-    <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
-    <h4>
-      <%= music.source.time %>
-    </h4>
-
-  </li>
-    <% end %>
+  </div>
 </ul>

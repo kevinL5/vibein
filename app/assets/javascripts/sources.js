@@ -20,15 +20,16 @@ $(document).ready(function() {
   });
 
   function scrollToAnchor(aid){
-    var aTag = $("a[name='id"+ aid +"']");
-    $('.music-list').animate({scrollTop: aTag.offset().top - 70 },'fast');
+    var aTag = $("a[id="+ aid +"]");
+    //alert(aTag.offset().top);
+    //var relativeY = $("elementA").offset().top - $("elementB").offset().top;
+    var pos = $(".music-list").offset().top;
+    $('.music-list').animate({scrollTop: aTag.offset().top - pos },'fast');
   }
 
-  $(".music-list").show(function() {
-    var id = $('.player:first').data('source-id');
+  //$(".music-list").show(function() {
+    var id = $('.player').attr("data-source-id");
     scrollToAnchor(id);
-  });
-
-
+  //});
 
 });

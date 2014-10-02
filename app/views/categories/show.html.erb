@@ -9,6 +9,9 @@
         <button class="btn btn-sm btn-create-playlist" data-toggle="modal" data-target="#myModalPlaylist">
           Create a new playlist
         </button>
+
+        <%= link_to 'View all', sources_path, :class => "btn btn-sm btn-view-all" %>
+
         <ul class="list-unstyled list-inline categories-list"><% current_user.categories.each do |category| %>
           <li>
             <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
