@@ -5,8 +5,8 @@
   <%= @profile %>
   <%= @friends %>
   <% @friends.each do |friend| %>
-    <%= friend.name %>
-    <% friend.id %>
+    <%= friend['name'] %>
+    <%= friend['id'] %>
   <% end %>
 
 <div class="container">
