@@ -41,7 +41,6 @@ class SourcesController < ApplicationController
   end
 
   def create
-
     @source = Source.new
     @url = params[:url]
 
@@ -52,7 +51,6 @@ class SourcesController < ApplicationController
     end
 
     redirect_to sources_path
-
   end
 
   private
