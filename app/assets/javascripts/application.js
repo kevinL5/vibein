@@ -14,8 +14,12 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_self
+//= require api
+//= require bookmarklets
 //= require categories
 //= require categorizations
+//= require friendmusics
+//= require friends
 //= require musics
 //= require player
 //= require public

@@ -11,8 +11,12 @@
  * file per style scope.
  *
  *= require_self
+ *= require api
+ *= bookmarklets
  *= require categories
  *= require categorizations
+ *= require friendmusics
+ *= require friends
  *= require musics
  *= require navbar
  *= require public
