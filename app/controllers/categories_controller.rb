@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
     category = Category.find(params[:id])
 
     if category.user_id == @user.id
-      @sources = category.categorizations.map(&:music).map(&:source)
+      @sources = category.categorizations.map(&:music).map(&:source).sort_by { |h| h[:id] }
     end
   end
 

@@ -5,13 +5,19 @@ class ApiController < ApplicationController
     @source = Source.new
     @url = params[:url]
 
-    if @url[/^(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?([\w-]{10,})/]
+    create
+
+    @source = Source.last
+  end
+
+  def create
+
+     if @url[/^(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?([\w-]{10,})/]
       create_youtube
     elsif @url[/^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/]
       create_soundcloud
     end
 
-    @source = Source.last
   end
 
   private

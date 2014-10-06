@@ -12,9 +12,9 @@ class SourcesController < ApplicationController
 
     if params[:search] && params[:search].length >= 1
       sources = @user.sources.basic_search(title: params[:search])
-      @sources = @user.musics.where(source_id: sources.map(&:id)).map(&:source)
+      @sources = @user.musics.where(source_id: sources.map(&:id)).map(&:source).sort_by { |h| h[:id] }
     else
-      @sources = @user.musics.map(&:source)
+      @sources = @user.musics.map(&:source).sort_by { |h| h[:id] }
     end
 
   end
@@ -64,6 +64,7 @@ class SourcesController < ApplicationController
     @source.duration = video.duration
     @source.uploaded = video.date
     @source.picture = video.thumbnail_large
+    @source.url = video.embed_url
     @source.time = time(@source.duration)
 
     @source.save
@@ -77,11 +78,12 @@ class SourcesController < ApplicationController
 
     @source.provider = "Soundcloud"
     @source.identification = track.id
-    @source.title = track.title
+    @source.title = "#{track.user.username} - #{track.title}"
     @source.uploader = track.user.username
     @source.duration = track.duration / 1000
     @source.uploaded = track.date
     @source.picture = track.user.avatar_url
+    @source.url = track.permalink_url
     @source.time = time(@source.duration)
 
     @source.save

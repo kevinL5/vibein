@@ -12,9 +12,9 @@ class FriendmusicsController < ApplicationController
 
     if params[:search] && params[:search].length >= 1
       sources = @friend.sources.basic_search(title: params[:search])
-      @sources = @friend.musics.where(source_id: sources.map(&:id)).map(&:source)
+      @sources = @friend.musics.where(source_id: sources.map(&:id)).map(&:source).sort_by { |h| h[:id] }
     else
-      @sources = @friend.musics.map(&:source)
+      @sources = @friend.musics.map(&:source).sort_by { |h| h[:id] }
     end
 
   end
@@ -30,7 +30,7 @@ class FriendmusicsController < ApplicationController
         sources = @friend.sources.basic_search(title: params[:search])
         @musics = @friend.musics.where(source_id: sources.map(&:id))
       else
-        @musics = @friend.musics
+        @musics = @friend.musics.map(&:source)
       end
 
       respond_with do |format|

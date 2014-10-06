@@ -1,0 +1,27 @@
+<div class="row">
+<div class="col-xs-12 col-md-offset-3 col-md-6">
+  <div class="music-box">
+    <div class="row">
+      <div class="col-xs-4">
+        <%= link_to friend.sources.last do %>
+          <%= image_tag friend.sources.last.picture.url(:medium), width: "100%", class: 'music-image' %>
+        <% end %>
+      </div>
+      <div class="col-xs-8">
+        <h3 class="music-title">
+          <%= link_to truncate(friend.sources.last.title, length: 50, separator: ' '), friend.sources.last %>
+        </h3>
+
+        <ul class="list-unstyle list-inline">
+          <li>
+            <h4>
+              <%= friend.sources.last.time %>
+            </h4>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
