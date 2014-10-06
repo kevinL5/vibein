@@ -9,9 +9,7 @@
       <div class="col-xs-8">
         <h3 class="music-title">
           <%= link_to truncate(source.title, length: 50, separator: ' '), source %>
-          <%= link_to music_path(source.id), method: :delete, :class => 'delete-song' do %>
-            <i class="fa fa-times"></i>
-          <% end %>
+          <%= link_to 'Destroy', music_path(source.id), method: :delete %>
         </h3>
 
         <ul class="list-unstyle list-inline">
