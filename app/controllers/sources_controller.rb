@@ -115,8 +115,4 @@ class SourcesController < ApplicationController
     Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
   end
 
-  def source_params
-    params.require(:source).permit(:provider, :identification, :title, :uploader, :duration, :uploaded, :picture)
-  end
-
 end
