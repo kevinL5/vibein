@@ -1,20 +1,45 @@
 <%= render partial: "sources/navbar" %>
 
+<img src=<%= asset_path('vinyl-bg.png') %> class="bg-friends" alt="Background">
+
+
 <div class="vertical-spacer"></div>
 
 <div class="text-center">
   <ul class="list-unstyled"><% @friends.each do |fb_friend| %>
     <% friend = User.where(:uid => fb_friend.friend_uid).first %>
-    <% if friend != nil %>
+    <% if friend != nil && friend.sources.length > 1 %>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6 col-sm-3 col-md-4 col-lg-2">
+            <div class="friend-box">
+              <li class="friend-infos"><%= link_to friend_friendmusics_path(fb_friend.id) do %>
+                <%= image_tag friend.picture, class: 'welcome-photo' %>
+              <% end %>
+              <%= link_to friend.name, friend_friendmusics_path(fb_friend.id) %></li>
 
-      <li><%= link_to friend_friendmusics_path(fb_friend.id) do %>
-        <%= image_tag friend.picture, class: 'welcome-photo' %>
-      <% end %>
-      <%= link_to friend.name, friend_friendmusics_path(fb_friend.id) %></li>
+              <div class="row">
+                <div class="col-xs-offset-1 col-xs-10">
+                  <li><%= link_to friend_friendmusic_path(fb_friend.id, friend.sources.last.id) do %>
+                    <%= image_tag friend.sources.last.picture.url(:medium), width: "100%", class: 'music-image' %>
+                  <% end %></li>
+                </div>
+              </div>
 
-      <% if friend.sources.length > 1 %>
-        <%= render partial: "friends/musicbox", locals: {friend: friend} %>
-      <% end %>
+
+              <li><h3 class="api-title">
+                <%= link_to truncate(friend.sources.last.title, length: 50, separator: ' '), friend_friendmusic_path(fb_friend.id, friend.sources.last.id) %>
+              </h3></li>
+
+              <li><h4 class="api-time">
+                <%= friend.sources.last.time %>
+              </h4></li>
+
+              <li><%= link_to 'Voir tous les morceaux', friend_friendmusics_path(fb_friend.id), :class => "btn btn-default" %></li>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <% end %>
   <% end %>
