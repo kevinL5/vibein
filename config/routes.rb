@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :bookmarklets, only: [:index]
 
   resources :friends, only: [:index] do
-    resources :friendmusics, only: [:index, :show]
+    resources :friendmusics, only: [:index, :show, :create]
   end
 
 

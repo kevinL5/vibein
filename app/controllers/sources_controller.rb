@@ -12,9 +12,9 @@ class SourcesController < ApplicationController
 
     if params[:search] && params[:search].length >= 1
       sources = @user.sources.basic_search(title: params[:search])
-      @sources = @user.musics.where(source_id: sources.map(&:id)).map(&:source).sort_by { |h| h[:id] }
+      @sources = @user.musics.where(source_id: sources.map(&:id)).sort_by { |h| h[:id] }.map(&:source)
     else
-      @sources = @user.musics.map(&:source).sort_by { |h| h[:id] }
+      @sources = @user.musics.sort_by { |h| h[:id] }.map(&:source)
     end
 
   end
@@ -57,17 +57,24 @@ class SourcesController < ApplicationController
 
   def create_youtube
     video = VideoInfo.new(params[:url])
+    new_source = Source.where(:identification => video.video_id).first
 
-    @source.provider = video.provider
-    @source.identification = video.video_id
-    @source.title = video.title
-    @source.duration = video.duration
-    @source.uploaded = video.date
-    @source.picture = video.thumbnail_large
-    @source.url = video.embed_url
-    @source.time = time(@source.duration)
+    if new_source == nil
 
-    @source.save
+      @source.provider = video.provider
+      @source.identification = video.video_id
+      @source.title = video.title
+      @source.duration = video.duration
+      @source.uploaded = video.date
+      @source.picture = video.thumbnail_large
+      @source.url = video.embed_url
+      @source.time = time(@source.duration)
+
+      @source.save
+
+    else
+      @source = new_source
+    end
 
     music_create
   end
@@ -75,18 +82,25 @@ class SourcesController < ApplicationController
   def create_soundcloud
     client = Soundcloud.new(:client_id => '7eda384a44d761c3108c153a6f9daa85')
     track = client.get('/resolve', :url => @url)
+    new_source = Source.where(:identification => track.id).first
 
-    @source.provider = "Soundcloud"
-    @source.identification = track.id
-    @source.title = "#{track.user.username} - #{track.title}"
-    @source.uploader = track.user.username
-    @source.duration = track.duration / 1000
-    @source.uploaded = track.date
-    @source.picture = track.user.avatar_url
-    @source.url = track.permalink_url
-    @source.time = time(@source.duration)
+    if new_source == nil
 
-    @source.save
+      @source.provider = "Soundcloud"
+      @source.identification = track.id
+      @source.title = "#{track.user.username} - #{track.title}"
+      @source.uploader = track.user.username
+      @source.duration = track.duration / 1000
+      @source.uploaded = track.date
+      @source.picture = track.user.avatar_url
+      @source.url = track.permalink_url
+      @source.time = time(@source.duration)
+
+      @source.save
+
+    else
+      @source = new_source
+    end
 
     music_create
   end

@@ -11,13 +11,9 @@
         </div>
 
         <div class="text-center">
-           <button class="btn btn-md btn-friend-song" onclick="myFunction()">Add this song to your playlist <i class="fa fa-heart-o"></i></button>
-
-          <script>
-          function myFunction() {
-              var url=encodeURIComponent(window.location.href);window.open("http://localhost:3000/api?url=<%= @source.url %>", "Vibe In", "menubar=no, status=no, scrollbars=no, menubar=no, width=500, height=250");
-          }
-          </script>
+          <div id="addbutton">
+            <%= render partial: "friendmusics/addbutton" %>
+          </div>
         </div>
 
         <div class="text-center share-area">
