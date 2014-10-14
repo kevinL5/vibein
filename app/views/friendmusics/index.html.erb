@@ -5,19 +5,37 @@
 <div class="container">
   <div class="music-table">
     <div class="row">
-      <div class="categories-select">
-        <ul class="nav navbar-nav">
-          <li> <%= image_tag @friend.picture, :class => "welcome-photo" %></li>
-          <li><p class="welcome-name">Music's from <%= @friend.name %></p></li>
-        </ul>
+        <nav class="navbar navbar-categories" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <ul class="nav navbar-nav">
+                <li> <%= image_tag @friend.picture, :class => "welcome-photo" %></li>
+                <li><p class="welcome-name">Music's from <%= @friend.name %></p></li>
+              </ul>
+            </div>
 
-        <ul class="list-unstyled list-inline categories-list"><% @friend.categories.each do |category| %>
-          <li>
-            <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav"><% @friend.categories.each do |category| %>
+                  <li>
+                     <%= link_to category.title %>
+                  </li>
+                  <% end %>
+                </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Trier par <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Date</a></li>
+                    <li><a href="#">Popularité</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
 
     </div>
 

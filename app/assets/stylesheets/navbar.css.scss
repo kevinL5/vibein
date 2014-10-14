@@ -1,18 +1,17 @@
 .search-navbar {
-  border-radius: 0;
+  border-radius: 20px;
   outline: none;
-  border: none;
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important;
-  border-bottom: 2px solid rgb(252, 98, 34);
+  border: 0.5px solid rgb(252, 98, 34);
 }
 
 .btn-search {
   border: none;
   font-size: 18px;
   color: rgb(252, 98, 34);
-  margin-left: -5px;
+  margin-left: -4px;
   margin-right: 10px;
 }
 
@@ -35,17 +34,13 @@
 
 .welcome-photo {
   width: 40px;
-  margin-top: 7px;
+  margin-top: 5px;
   margin-right: 15px;
   border-radius: 50%;
 }
 
 .navbar-name {
   color: #fc6122;
-}
-
-.navbar-friends {
-  color: #3B5998;
 }
 
 .disconnect {
@@ -119,5 +114,73 @@
     color: #fc6122;
     font-weight: bold;
     background-color: #fff;
+  }
+}
+
+
+.navbar-categories {
+  background-color: #2a6496;
+  border-color: #2a6496;
+}
+.navbar-categories .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-categories .navbar-brand:hover, .navbar-categories .navbar-brand:focus {
+  color: #fc6122;
+}
+.navbar-categories .navbar-text {
+  color: #ecf0f1;
+}
+.navbar-categories .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-categories .navbar-nav > li > a:hover, .navbar-categories .navbar-nav > li > a:focus {
+  color: #fc6122;
+  background-color: #2a6496;
+}
+.navbar-categories .navbar-nav > .active > a, .navbar-categories .navbar-nav > .active > a:hover, .navbar-categories .navbar-nav > .active > a:focus {
+  color: #fc6122;
+  background-color: #2a6496;
+}
+.navbar-categories .navbar-nav > .open > a, .navbar-categories .navbar-nav > .open > a:hover, .navbar-categories .navbar-nav > .open > a:focus {
+  color: #fc6122;
+  background-color: #2a6496;
+}
+.navbar-categories .navbar-toggle {
+  border-color: #2a6496;
+}
+.navbar-categories .navbar-toggle:hover, .navbar-categories .navbar-toggle:focus {
+  background-color: #2a6496;
+}
+.navbar-categories .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-categories .navbar-collapse,
+.navbar-categories .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-categories .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-categories .navbar-link:hover {
+  color: #fc6122;
+}
+
+@media (max-width: 767px) {
+  .navbar-categories
+ .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+  }
+  .navbar-categories
+ .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-categories
+ .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fc6122;
+  }
+  .navbar-categories
+ .navbar-nav .open .dropdown-menu > .active > a, .navbar-categories
+ .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-categories
+ .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fc6122;
+    background-color: #2a6496;
   }
 }

@@ -5,22 +5,7 @@
 <div class="container">
   <div class="music-table">
     <div class="row">
-      <div class="categories-select">
-        <button class="btn btn-sm btn-create-playlist" data-toggle="modal" data-target="#myModalPlaylist">
-          Create a new playlist
-        </button>
-
-        <ul class="list-unstyled list-inline categories-list"><% current_user.categories.each do |category| %>
-          <li>
-            <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
-            <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category" do %>
-              <i class="fa fa-times"></i>
-            <% end %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-
+      <%= render partial: "sources/navbar_categories" %>
     </div>
 
     <% if @musics.length == 0 %>
@@ -39,18 +24,33 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">Create a new playlist</h4>
+          <h3 class="modal-title text-center" id="myModalLabel">Gérer vos playlists</h3>
         </div>
         <div class="modal-body">
+
+          <h3>Vos playlists actuelles</h3>
+
+          <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
+            <li>
+              <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
+              <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category" do %>
+                <i class="fa fa-times"></i>
+              <% end %>
+            </li>
+          <% end %>
+          </ul>
+
+          <h3>Créer une nouvelle playlist</h3>
+
           <ul class="list-unstyled">
             <%= form_for @category do |f| %>
 
-            <h3>Select a title</h3>
+            <h4>Choisir un titre</h4>
             <li>
               <%= f.text_field :title %>
             </li></br>
 
-            <h3>Select a color to identified your playlist</h3>
+            <h4>Choir une couleur</h4>
 
             <li>
               <%= f.radio_button :thumbnail, "1DD2AF" %>

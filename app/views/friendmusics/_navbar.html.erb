@@ -10,7 +10,7 @@
       <ul class="nav navbar-nav">
         <li> <%= image_tag current_user.picture, :class => "welcome-photo" %></li>
         <li><p class="welcome-name"><%= notice %><%= link_to current_user.name, sources_path, :class => "navbar-name" %></p></li>
-        <li><p class="welcome-name"><%= link_to 'Friends', friends_path, :class => "navbar-friends" %></p></li>
+        <li><p class="welcome-name"><%= link_to 'Friends', friends_path %></p></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

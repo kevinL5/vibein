@@ -1,6 +1,6 @@
 <%= render partial: "sources/navbar" %>
 
-<img src=<%= asset_path('vinyl-bg.png') %> class="bg-friends" alt="Background">
+<img src=<%= asset_path('vinyl-bg.jpg') %> class="bg-friends" alt="Background">
 
 
 <div class="vertical-spacer"></div>
@@ -34,7 +34,7 @@
                 <%= friend.sources.last.time %>
               </h4></li>
 
-              <li class="text-center"><%= link_to 'Voir tous les morceaux', friend_friendmusics_path(fb_friend.id), :class => "btn btn-default" %></li>
+              <li class="text-center"><%= link_to 'Voir tous les morceaux', friend_friendmusics_path(fb_friend.id), :class => "btn btn-default btn-friendmusics-all" %></li>
             </div>
           </div>
 

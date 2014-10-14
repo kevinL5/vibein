@@ -1,4 +1,4 @@
-<img src=<%= asset_path('background.png') %> class="bg" alt="Background">
+<img src=<%= asset_path('background.jpg') %> class="bg" alt="Background">
 
 <div id="nav-brand">
   <h2>VIBE IN</h2>
@@ -30,7 +30,8 @@
 
           </br></br></br>
 
-          <%= link_to image_tag(asset_path('fb-connect.png'), :width => 190), omniauth_authorize_path(:user, :facebook) %>
+          <%= link_to(image_tag("fb-connect.png", :alt => "Facebook Connection", :width => 190), omniauth_authorize_path(:user, :facebook)) %>
+
 
         </div>
       </div>
