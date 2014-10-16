@@ -21,7 +21,7 @@
             </h4>
           </li>
 
-          <% music = Music.where('source_id' => source.id).first %>
+          <% music = Music.where('source_id' => source.id).where('user_id' => current_user.id).first %>
 
           <li>
             <div id="popover_<%= music.id%>" class="popover-markup">

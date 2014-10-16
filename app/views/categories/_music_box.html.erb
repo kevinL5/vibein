@@ -1,48 +1,42 @@
 <div class="col-xs-12 col-md-6">
-  <div class="row">
-    <div class="col-xs-4">
-      <%= link_to music do %>
-        <%= image_tag music.picture.url(:medium), width: "100%", class: 'music-image' %>
-      <% end %>
-    </div>
-    <div class="col-xs-8">
-      <h3 class="music-title">
-        <%= link_to truncate(music.title, length: 50, separator: ' '), music %>
-        <%= link_to music, method: :delete do %>
-          <i class="fa fa-times"></i>
+  <div class="music-box">
+    <div class="row">
+      <div class="col-xs-4">
+        <%= link_to category_source_path(params[:id], source.id) do %>
+          <%= image_tag source.picture.url(:medium), width: "100%", class: 'music-image' %>
         <% end %>
-      </h3>
+      </div>
+      <div class="col-xs-8">
+        <h3 class="music-title">
+          <%= link_to truncate(source.title, length: 50, separator: ' '), category_source_path(params[:id], source.id) %>
+          <%= link_to music_path(source.id), method: :delete, :class => 'delete-song' do %>
+            <i class="fa fa-times"></i>
+          <% end %>
+        </h3>
 
-      <ul class="list-unstyle list-inline">
-        <li>
-          <h4>
-            <% time = music.duration.to_i %>
-            <%= time.divmod(60).join(':') %>
-          </h4>
-        </li>
+        <ul class="list-unstyle list-inline">
+          <li>
+            <h4>
+              <%= source.time %>
+            </h4>
+          </li>
 
-        <li>
-          <div class="popover-markup">
-            <button class="btn-add-playlist trigger" data-toggle="popover" data-placement='bottom'>
-              P
-            </button>
-            <div class="head hide">Add to a playlist</div>
-            <div class="content hide">
-              <ul class="list-unstyled"><% current_user.categories.each do |category| %>
-                <li><%= link_to category.title, categorizations_path(music_id: music.id, category_id: category.id), :method => :post %></li>
-                <% end %>
-              </ul>
+          <% music = Music.where('source_id' => source.id).where('user_id' => current_user.id).first %>
+
+          <li>
+            <div id="popover_<%= music.id%>" class="popover-markup">
+              <%= render partial: "sources/popover", locals: {music: music} %>
             </div>
-            <div class="footer hide">test</div>
-          </div>
-        </li>
+          </li>
 
-        <li>
-          <div id="categories_<%= music.id%>">
-            <%= render partial: "categories", locals: {music: music} %>
-          </div>
-        </li>
-      </ul>
+          <li>
+            <div id="categories_<%= music.id%>">
+              <%= render partial: "sources/categories", locals: {music: music} %>
+            </div>
+          </li>
+
+        </ul>
+      </div>
     </div>
   </div>
 </div>

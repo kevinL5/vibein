@@ -15,14 +15,20 @@ Rails.application.routes.draw do
 
   resources :categorizations, only: [:create, :destroy]
 
-  resources :categories, only: [:show, :create, :destroy]
+  resources :categories, only: [:show, :create, :destroy] do
+    resources :sources, only: [:show]
+  end
 
   resources :api, only: [:index]
 
   resources :bookmarklets, only: [:index]
 
   resources :friends, only: [:index] do
+    resources :categories, only: [:show] do
+      resources :friendmusics, only: [:show]
+    end
     resources :friendmusics, only: [:index, :show, :create]
+    resources :categories, only: [:show]
   end
 
 

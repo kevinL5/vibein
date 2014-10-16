@@ -1,26 +1,54 @@
 <ul class="list-unstyled">
   <div class="row">
-    <% @musics.reverse.each do |music| %>
-    <li>
-      <div class="col-sm-12">
-        <div class="row">
-          <a id="<%= music.source.id %>"/>
 
-          <div class="col-sm-4 col-md-3">
-            <%= link_to source_path(music.source) do %>
-              <%= image_tag music.source.picture.url(:thumb) %>
-            <% end %>
-          </div>
+    <% if params[:category_id] == nil %>
+      <% @musics.reverse.each do |music| %>
+      <li>
+        <div class="col-sm-12">
+          <div class="row">
+            <a id="<%= music.source.id %>"/>
 
-          <div class="col-sm-8 col-md-7">
-            <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
-            <h4>
-              <%= music.source.time %>
-            </h4>
+            <div class="col-sm-4 col-md-3">
+              <%= link_to source_path(music.source) do %>
+                <%= image_tag music.source.picture.url(:thumb) %>
+              <% end %>
+            </div>
+
+            <div class="col-sm-8 col-md-7">
+              <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
+              <h4>
+                <%= music.source.time %>
+              </h4>
+            </div>
           </div>
         </div>
-      </div>
-    </li>
+      </li>
       <% end %>
+
+    <% else %>
+      <% Categorization.where(:category_id => params[:category_id]).map(&:music).reverse.each do |music| %>
+      <li>
+        <div class="col-sm-12">
+          <div class="row">
+            <a id="<%= music.source.id %>"/>
+
+            <div class="col-sm-4 col-md-3">
+              <%= link_to category_source_path(params[:category_id], music.source) do %>
+                <%= image_tag music.source.picture.url(:thumb) %>
+              <% end %>
+            </div>
+
+            <div class="col-sm-8 col-md-7">
+              <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), category_source_path(params[:category_id], music.source) %></h3>
+              <h4>
+                <%= music.source.time %>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    <% end %>
+
   </div>
 </ul>
