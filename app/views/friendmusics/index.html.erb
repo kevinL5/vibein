@@ -17,9 +17,13 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav"><% @friend.categories.each do |category| %>
+              <ul class="nav navbar-nav">
+                <% if params[:category_id] != nil %>
+                  <li><%= link_to 'View all', friend_friendmusics_path(@friend_id) %></li>
+                <% end %>
+                  <% @friend.categories.each do |category| %>
                   <li>
-                     <%= link_to category.title %>
+                     <%= link_to category.title, friend_category_friendmusics_path(@friend_id, category.id) %>
                   </li>
                   <% end %>
                 </ul>

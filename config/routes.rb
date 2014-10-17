@@ -25,10 +25,9 @@ Rails.application.routes.draw do
 
   resources :friends, only: [:index] do
     resources :categories, only: [:show] do
-      resources :friendmusics, only: [:show]
+      resources :friendmusics, only: [:index, :show]
     end
     resources :friendmusics, only: [:index, :show, :create]
-    resources :categories, only: [:show]
   end
 
 

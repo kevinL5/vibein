@@ -39,7 +39,7 @@ class FriendmusicsController < ApplicationController
         format.js { render "sources/musics_aside" }
       end
     else
-      @musics = @friend.musics
+      @musics = @friend.musics.sort_by { |h| h[:id] }
     end
   end
 
