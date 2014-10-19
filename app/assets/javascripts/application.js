@@ -18,6 +18,7 @@
 //= require bookmarklets
 //= require categories
 //= require categorizations
+//= require endless_scroll
 //= require facebook
 //= require friendmusics
 //= require friends

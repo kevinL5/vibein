@@ -2,6 +2,8 @@ class SourcesController < ApplicationController
   before_action :authenticate_user!
   respond_to :js
 
+  require 'will_paginate/array'
+
   def index
 
     @user = current_user
@@ -9,12 +11,27 @@ class SourcesController < ApplicationController
     @musics = @user.musics
     @category = Category.new
 
+    if params[:category_id] == nil
 
-    if params[:search] && params[:search].length >= 1
-      sources = @user.sources.basic_search(title: params[:search])
-      @sources = @user.musics.where(source_id: sources.map(&:id)).sort_by { |h| h[:id] }.map(&:source)
+      if params[:search] && params[:search].length >= 1
+        sources = @user.sources.basic_search(title: params[:search])
+        @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
+      else
+        @sources = @user.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+      end
+
     else
-      @sources = @user.musics.sort_by { |h| h[:id] }.map(&:source)
+
+      category = Category.find(params[:category_id])
+
+      if category.user_id == @user.id
+        if params[:search] && params[:search].length >= 1
+          sources = @user.sources.basic_search(title: params[:search])
+          @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+        else
+          @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+        end
+      end
     end
 
   end

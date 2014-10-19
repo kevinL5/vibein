@@ -2,13 +2,25 @@
   <div class="music-box">
     <div class="row">
       <div class="col-xs-4">
-        <%= link_to source do %>
-          <%= image_tag source.picture.url(:medium), width: "100%", class: 'music-image' %>
+        <% if params[:category_id] != nil %>
+          <%= link_to category_source_path(params[:category_id].to_i, source.id) do %>
+            <%= image_tag source.picture.url(:medium), width: "100%", class: 'music-image' %>
+          <% end %>
+        <% else %>
+          <%= link_to source do %>
+            <%= image_tag source.picture.url(:medium), width: "100%", class: 'music-image' %>
+          <% end %>
         <% end %>
+
       </div>
       <div class="col-xs-8">
         <h3 class="music-title">
-          <%= link_to truncate(source.title, length: 50, separator: ' '), source %>
+          <% if params[:category_id] != nil %>
+            <%= link_to truncate(source.title, length: 50, separator: ' '), category_source_path(params[:category_id].to_i, source.id) %>
+          <% else %>
+            <%= link_to truncate(source.title, length: 50, separator: ' '), source %>
+          <% end %>
+
           <%= link_to music_path(source.id), method: :delete, :class => 'delete-song' do %>
             <i class="fa fa-times"></i>
           <% end %>

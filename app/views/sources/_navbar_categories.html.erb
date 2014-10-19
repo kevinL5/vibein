@@ -7,12 +7,22 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav"><% current_user.categories.each do |category| %>
-          <li>
-            <%= link_to category.title, category_path(id: category.id) %>
+      <ul class="nav navbar-nav">
+        <% if params[:category_id] != nil %>
+          <li><%= link_to 'View all', sources_path %></li>
+        <% end %>
+        <% current_user.categories.each do |category| %>
+        <% if params[:category_id].to_i == category.id %>
+          <li class="active">
+            <%= link_to category.title, category_sources_path(category.id) %>
           </li>
-          <% end %>
-        </ul>
+        <% else %>
+          <li>
+            <%= link_to category.title, category_sources_path(category.id) %>
+          </li>
+        <% end %>
+        <% end %>
+      </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

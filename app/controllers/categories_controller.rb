@@ -1,17 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
-   def show
-    @user = current_user
-    @source = Source.new
-    @category = Category.new
-    category = Category.find(params[:id])
-
-    if category.user_id == @user.id
-      @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source)
-    end
-  end
-
   def create
     if current_user.categories.length < 5
       current_user.categories.create(category_params)

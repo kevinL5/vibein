@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
   resources :categorizations, only: [:create, :destroy]
 
-  resources :categories, only: [:show, :create, :destroy] do
-    resources :sources, only: [:show]
+  resources :categories, only: [:create, :destroy] do
+    resources :sources, only: [:index, :show]
   end
 
   resources :api, only: [:index]

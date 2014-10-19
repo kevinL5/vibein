@@ -11,7 +11,9 @@
     <% if @musics.length == 0 %>
       <%= render partial: "music_start" %>
     <% else %>
-      <%= render partial: "music_container" %>
+      <div class="ressources">
+        <%= render partial: "music_container" %>
+      </div>
     <% end %>
 
   </div>
