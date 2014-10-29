@@ -14,11 +14,11 @@
 
       </div>
       <div class="col-xs-8">
-        <h3 class="music-title">
+        <h3>
           <% if params[:category_id] != nil %>
-            <%= link_to truncate(source.title, length: 50, separator: ' '), category_source_path(params[:category_id].to_i, source.id) %>
+            <%= link_to truncate(source.title,length: 50, separator: ' '), category_source_path(params[:category_id].to_i, source.id), :class => 'music-title' %>
           <% else %>
-            <%= link_to truncate(source.title, length: 50, separator: ' '), source %>
+            <%= link_to truncate(source.title, length: 50, separator: ' '), source, :class => 'music-title' %>
           <% end %>
 
           <%= link_to music_path(source.id), method: :delete, :class => 'delete-song' do %>
@@ -46,8 +46,8 @@
               <%= render partial: "sources/categories", locals: {music: music} %>
             </div>
           </li>
-
         </ul>
+
       </div>
     </div>
   </div>

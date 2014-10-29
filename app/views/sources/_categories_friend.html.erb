@@ -1,0 +1,7 @@
+<ul class="list-inline list-unstyle">
+  <% music.categorizations.each do |categorization|%>
+    <li>
+    <%= link_to categorization.category.title, friend_category_sources_path(params[:friend_id], categorization.category.id), :class => "btn-music-category color-#{categorization.category.thumbnail}" %>
+    </li>
+  <% end %>
+</ul>

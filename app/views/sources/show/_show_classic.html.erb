@@ -1,5 +1,3 @@
-<%= render partial: "sources/navbar" %>
-
 <div class="bg-grey">
   <div class="container-fluid">
     <div class="row">
@@ -10,14 +8,11 @@
             <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
           </div>
 
-          <div class="text-center">
-            <div id="addbutton">
-              <%= render partial: "friendmusics/addbutton" %>
-            </div>
-          </div>
-
           <div class="text-center share-area">
-            <h3 class="share-text-h3 share-text-top">
+            <h2 class="share-text-h2">
+              Vibe In est gratuit et sans publicité.
+            </h2>
+            <h3 class="share-text-h3">
               Soutenez-nous en partageant vos coups de coeur, sur les réseaux sociaux.
             </h3>
             <div class="fb-like" data-href="http://vibein.herokuapp.com/sources/<%= @source.id %>/public" data-width="400" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
@@ -35,7 +30,7 @@
         <div class="row">
           <div class="music-list">
             <div id="musics_aside">
-              <%= render partial: "friendmusics/musics_aside", locals: {sources: @sources, friend: @friend_id} %>
+              <%= render partial: "sources/musics_aside", locals: {sources: @sources} %>
             </div>
           </div>
         </div>

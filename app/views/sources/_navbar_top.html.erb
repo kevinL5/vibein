@@ -1,0 +1,37 @@
+<div class="navbar-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-sm-4 col-xs-12 col-md-4">
+        <div class="pull-left">
+          <ul class="userMenu">
+            <li>
+              <a data-toggle="modal" data-target="#myModalPlaylist" href="#"><i class="fa fa-gear"></i> Garage à playlists</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-9 col-sm-8 col-md-8 hidden-xs no-margin no-padding">
+        <div class="pull-right">
+          <ul class="userMenu">
+            <% if params[:category_id] != nil %>
+              <li><%= link_to 'View all', sources_path %></li>
+            <% end %>
+            <% current_user.categories.each do |category| %>
+              <% if params[:category_id].to_i == category.id %>
+                <li>
+                  <%= link_to category_sources_path(category.id) do %>
+                    <i class="fa fa-play"></i> <%= category.title %>
+                  <% end %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to category.title, category_sources_path(category.id) %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

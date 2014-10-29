@@ -1,56 +1,150 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+<!-- Fixed navbar start -->
+<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+
+  <div class="container">
     <div class="navbar-header">
-      <%= link_to 'VIBE IN', sources_path, :class => "navbar-brand" %>
-    </div>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> </button>
+      <%= link_to(image_tag("logo.png", :alt => "VIBE IN", :width => "120"), sources_path, :class => "navbar-brand") %>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li> <%= image_tag current_user.picture, :class => "welcome-photo" %></li>
-        <li><p class="welcome-name"><%= notice %><%= link_to current_user.name, sources_path, :class => "navbar-name" %></p></li>
-        <li><p class="welcome-name"><%= link_to 'Friends', friends_path %></p></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <% if @source.id == nil %>
-          <li style="position: inherit;">
-            <div class="popover-markup">
-              <button class="btn btn-default btn-add trigger" data-toggle="popover" data-placement='left'>
-                <i class="fa fa-plus"></i>
-              </button>
-              <div class="head hide">Add a new song</div>
-              <div class="content hide">
-
-                <%= form_for(@source) do |f| %>
-                    <div class="form-group">
-                      <%= label_tag :url %>
-                      <%= text_field_tag :url, '', :class => 'form-control', :placeholder => "Enter url here" %>
-                    </div>
-                  <%= f.submit "Submit", :class => 'btn btn-default btn-block' %>
-                <% end %>
-
-              </div>
-              <div class="footer hide">test</div>
-            </div>
-          </li>
-        <% end %>
-
-        <li class="disconnect">
-          <%= link_to destroy_user_session_path, method: :delete do %>
+      <!-- this part for mobile -->
+      <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
+        <div class="input-group">
+          <%= button_to destroy_user_session_path, method: :delete, :class => "btn btn-nobg" do %>
             <i class="fa fa-power-off"></i>
           <% end %>
-        </li>
+        </div>
+      </div>
+      <% if @source.id == nil %>
+        <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
+          <div class="input-group">
+            <button class="btn btn-nobg getFullSearch" type="button"> <i class="fa fa-plus"> </i> </button>
+          </div>
+          <!-- /input-group -->
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"> <%= link_to "Home", sources_path %> </li>
+        <li class="active"> <%= link_to "Friends", friends_path %> </li>
       </ul>
 
-      <form class="navbar-form navbar-right" role="search" action="/sources/<%= @source.id %>" method="GET" <%= @source.id ? 'data-remote="true"' : '' %>>
-        <div class="form-group">
-          <input name="search" type="text" class="form-control search-navbar" placeholder="Tracks, Artist, Channel, ...">
+      <!--- this part will be hidden for mobile version -->
+      <div class="nav navbar-nav navbar-right hidden-xs">
+        <div class="search-box">
+          <div class="input-group">
+            <%= button_to destroy_user_session_path, method: :delete, :class => "btn btn-nobg" do %>
+              <i class="fa fa-power-off"></i>
+            <% end %>
+          </div>
         </div>
-        <button type="submit" class="btn btn-default btn-search"><i class="fa fa-search"></i></button>
-      </form>
 
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+        <!-- Button trigger modal -->
+        <% if @source.id == nil %>
+          <div class="search-box">
+            <div class="input-group">
+              <button class="btn btn-nobg getFullSearch" type="button"> <i class="fa fa-plus"> </i> </button>
+            </div>
+            <!-- /input-group -->
+          </div><!--/.search-box -->
+        <% end %>
+
+
+      </div><!--/.navbar-nav hidden-xs-->
+    </div><!--/.nav-collapse -->
+
+  </div> <!--/.container -->
+
+  <div class="search-full text-right"> <a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
+    <div class="searchInputBox pull-right">
+      <%= form_for(@source) do |f| %>
+          <%= text_field_tag :url, '', :class => 'search-input', :placeholder => "Copier l'url d'un morceau Youtube ou Soundcloud" %>
+          <%= f.submit "", :class => 'btn-nobg search-btn' do %>
+            <i class='fa fa-plus'>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
+
+  <!--/.search-full-->
+
+  <% if params[:friend_id] != nil && @source.id == nil %>
+    <%= render partial: "sources/navbar_top_friend" %>
+  <% elsif @source.id == nil %>
+    <%= render partial: "sources/navbar_top" %>
+  <% else %>
+  <% end %>
+  <!--/.navbar-top-->
+
+</div>
+<!-- /.Fixed navbar  -->
+
+
+<!-- Modal Playlists -->
+<div class="modal fade" id="myModalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h3 class="modal-title text-center" id="myModalLabel">Gérer vos playlists</h3>
+        </div>
+        <div class="modal-body">
+
+          <h3>Vos playlists actuelles</h3>
+          <% @category = Category.new %>
+          <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
+            <li>
+              <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
+              <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category", data: {confirm: "Are you sure you  want to delete this playlist ?"} do %>
+                <i class="fa fa-times"></i>
+              <% end %>
+            </li>
+          <% end %>
+          </ul>
+
+          <h3>Créer une nouvelle playlist</h3>
+
+          <ul class="list-unstyled">
+            <%= form_for @category do |f| %>
+
+            <h4>Choisir un titre</h4>
+            <li>
+              <%= f.text_field :title %>
+            </li></br>
+
+            <h4>Choir une couleur</h4>
+
+            <li>
+              <%= f.radio_button :thumbnail, "1DD2AF" %>
+              <%= label "", nil, class: "color-selector color-1DD2AF" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "2BBE68" %>
+              <%= label "", nil, class: "color-selector color-2BBE68" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "2E8DCC" %>
+              <%= label "", nil, class: "color-selector color-2E8DCC" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "F1C40F" %>
+              <%= label "", nil, class: "color-selector color-F1C40F" %>
+            </li>
+            <li>
+              <%= f.radio_button :thumbnail, "EA6153" %>
+              <%= label "", nil, class: "color-selector color-EA6153" %>
+            </li>
+
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit "Let's go !", :class => "btn btn-default" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>

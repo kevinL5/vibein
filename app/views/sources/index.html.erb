@@ -1,86 +1,20 @@
 <%= render partial: "sources/navbar" %>
 
-<div class="vertical-spacer"></div>
+<div class="bg-grey">
 
-<div class="container">
-  <div class="music-table">
-    <div class="row">
-      <%= render partial: "sources/navbar_categories" %>
+  <div class="vertical-spacer"></div>
+
+  <div class="container">
+    <div class="music-table">
+
+      <% if @musics.length == 0 %>
+        <%= render partial: "music_start" %>
+      <% else %>
+        <div class="ressources">
+          <%= render partial: "music_container" %>
+        </div>
+      <% end %>
+
     </div>
-
-    <% if @musics.length == 0 %>
-      <%= render partial: "music_start" %>
-    <% else %>
-      <div class="ressources">
-        <%= render partial: "music_container" %>
-      </div>
-    <% end %>
-
   </div>
-</div>
-
-
-<div class="modal fade" id="myModalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h3 class="modal-title text-center" id="myModalLabel">Gérer vos playlists</h3>
-        </div>
-        <div class="modal-body">
-
-          <h3>Vos playlists actuelles</h3>
-
-          <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
-            <li>
-              <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
-              <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category" do %>
-                <i class="fa fa-times"></i>
-              <% end %>
-            </li>
-          <% end %>
-          </ul>
-
-          <h3>Créer une nouvelle playlist</h3>
-
-          <ul class="list-unstyled">
-            <%= form_for @category do |f| %>
-
-            <h4>Choisir un titre</h4>
-            <li>
-              <%= f.text_field :title %>
-            </li></br>
-
-            <h4>Choir une couleur</h4>
-
-            <li>
-              <%= f.radio_button :thumbnail, "1DD2AF" %>
-              <%= label "", nil, class: "color-selector color-1DD2AF" %>
-            </li>
-            <li>
-              <%= f.radio_button :thumbnail, "2BBE68" %>
-              <%= label "", nil, class: "color-selector color-2BBE68" %>
-            </li>
-            <li>
-              <%= f.radio_button :thumbnail, "2E8DCC" %>
-              <%= label "", nil, class: "color-selector color-2E8DCC" %>
-            </li>
-            <li>
-              <%= f.radio_button :thumbnail, "F1C40F" %>
-              <%= label "", nil, class: "color-selector color-F1C40F" %>
-            </li>
-            <li>
-              <%= f.radio_button :thumbnail, "EA6153" %>
-              <%= label "", nil, class: "color-selector color-EA6153" %>
-            </li>
-
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <%= f.submit "Let's go !", :class => "btn btn-default" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
 </div>

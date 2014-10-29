@@ -5,33 +5,65 @@ class SourcesController < ApplicationController
   require 'will_paginate/array'
 
   def index
-
-    @user = current_user
     @source = Source.new
-    @musics = @user.musics
     @category = Category.new
 
-    if params[:category_id] == nil
+    if params[:friend_id] == nil
+      @user = current_user
+      @musics = @user.musics
+      @search_js = params[:search]
 
-      if params[:search] && params[:search].length >= 1
-        sources = @user.sources.basic_search(title: params[:search])
-        @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
+      if params[:category_id] == nil
+
+        if params[:search] && params[:search].length >= 1
+          sources = @user.sources.basic_search(title: params[:search])
+          @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
+        else
+          @sources = @user.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+        end
+
       else
-        @sources = @user.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+        category = Category.find(params[:category_id])
+
+        if category.user_id == @user.id
+          if params[:search] && params[:search].length >= 1
+            sources = @user.sources.basic_search(title: params[:search])
+            @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+          else
+            @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+          end
+        end
       end
 
     else
+      friend_uid = Friend.find(params[:friend_id]).friend_uid
+      @friend_id = Friend.find(params[:friend_id]).id
+      @friend = User.where(:uid => friend_uid).first
+      @musics = @friend.musics
 
-      category = Category.find(params[:category_id])
+      if params[:category_id] == nil
 
-      if category.user_id == @user.id
         if params[:search] && params[:search].length >= 1
-          sources = @user.sources.basic_search(title: params[:search])
-          @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+          sources = @friend.sources.basic_search(title: params[:search])
+          @sources = @friend.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
         else
-          @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+          @sources = @friend.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
         end
+
+      else
+        category = Category.find(params[:category_id])
+
+        if category.user_id == @friend.id
+          if params[:search] && params[:search].length >= 1
+            sources = @friend.sources.basic_search(title: params[:search])
+            @sources = @friend.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
+          else
+            @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+          end
+        end
+
       end
+
     end
 
   end
@@ -40,21 +72,52 @@ class SourcesController < ApplicationController
     @user = current_user
     @source = Source.find(params[:id])
 
-    if params[:search]
-      if params[:search].length >= 1
-        sources = @user.sources.basic_search(title: params[:search])
-        @musics = @user.musics.where(source_id: sources.map(&:id))
+    if params[:friend_id] == nil
+
+      if params[:search]
+        if params[:search].length >= 1
+          sources = @user.sources.basic_search(title: params[:search])
+          @musics = @user.musics.where(source_id: sources.map(&:id))
+        else
+          @musics = @user.musics
+        end
+
+        respond_with do |format|
+          format.html { redirect_to source_path(@source.id) }
+          format.js { render "musics_aside" }
+        end
       else
         @musics = @user.musics
       end
 
-      respond_with do |format|
-        format.html { redirect_to source_path(@source.id) }
-        format.js { render "musics_aside" }
-      end
     else
-      @musics = @user.musics
+      friend_uid = Friend.find(params[:friend_id]).friend_uid
+      @friend_id = Friend.find(params[:friend_id]).id
+      @friend = User.where(:uid => friend_uid).first
+      @source = Source.find(params[:id])
+
+      if params[:search]
+        if params[:search].length >= 1
+          sources = @friend.sources.basic_search(title: params[:search])
+          @musics = @friend.musics.where(source_id: sources.map(&:id))
+        else
+          @musics = @friend.musics.map(&:source)
+        end
+
+        respond_with do |format|
+          format.html { redirect_to source_path(@source.id) }
+          format.js { render "sources/musics_aside_friend" }
+        end
+      else
+        @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 20)
+
+        respond_with do |format|
+          format.html
+          format.js
+        end
+      end
     end
+
   end
 
   def create
@@ -67,7 +130,7 @@ class SourcesController < ApplicationController
       create_soundcloud
     end
 
-    redirect_to sources_path
+    redirect_to(:back)
   end
 
   private

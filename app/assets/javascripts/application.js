@@ -23,6 +23,7 @@
 //= require friendmusics
 //= require friends
 //= require musics
+//= require navbar
 //= require player
 //= require public
 //= require sources

@@ -1,0 +1,54 @@
+<ul class="list-unstyled">
+
+  <% if params[:category_id] == nil %>
+    <% @musics.each do |music| %>
+    <li>
+      <div class="col-sm-12">
+        <div class="row">
+          <a id="<%= music.source.id %>"/>
+
+          <div class="col-sm-4 col-md-3">
+            <%= link_to source_path(music.source) do %>
+              <%= image_tag music.source.picture.url(:thumb) %>
+            <% end %>
+          </div>
+
+          <div class="col-sm-8 col-md-7">
+            <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), friend_source_path(params[:friend_id], music.source.id) %></h3>
+            <h4>
+              <%= music.source.time %>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </li>
+      <% end %>
+
+  <% else %>
+    <% Categorization.where(:category_id => params[:category_id]).map(&:music).sort_by { |h| h[:id] }.each do |music| %>
+    <li>
+      <div class="col-sm-12">
+        <div class="row">
+          <a id="<%= music.source.id %>"/>
+
+          <div class="col-sm-4 col-md-3">
+            <%= link_to friend_category_source_path(params[:friend_id], params[:category_id], music.source.id) do %>
+              <%= image_tag music.source.picture.url(:thumb) %>
+            <% end %>
+          </div>
+
+          <div class="col-sm-8 col-md-7">
+            <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), friend_category_source_path(params[:friend_id], params[:category_id], music.source.id) %></h3>
+            <h4>
+              <%= music.source.time %>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </li>
+    <% end %>
+  <% end %>
+
+</ul>
+
+<%= will_paginate @musics %>

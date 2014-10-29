@@ -9,7 +9,7 @@
   border: 0.5px solid rgba(230, 230, 230, 0.5);
   box-shadow: 1px 1px 10px #E6E6E6;
   padding: 5px 5px;
-  margin-bottom: 5px;
+  margin: 0px -10px 5px -10px;
 }
 
 .music-table {
@@ -56,6 +56,10 @@
   color: #E6E6E6;
 }
 
+.delete-song:hover {
+  color: #FF3F3A;
+}
+
 .music-image {
   border-radius: 3px;
   margin-bottom: 7px;
@@ -67,6 +71,12 @@
   border-radius: 2px;
 }
 
+.music-title {
+  color: #6F676C;
+}
+.music-title:hover {
+  color: #454043;
+}
 .music-table h3 {
   margin-top: 10px;
   font-size: 18px;
@@ -156,18 +166,48 @@
 }
 
 .player {
-  padding-top: 100px;
+  padding-top: 4em;
 }
 
-.music-list {
-  overflow: scroll;
-  height: 580px;
-  margin-right: 15px;
+.music-aside {
+  margin-top: 4em;
+  margin-left: -10px;
+  background-color: #FFF;
   border: 0.5px solid rgba(230, 230, 230, 0.8);
   box-shadow: 2px 2px 10px #E6E6E6;
 }
 
-.music-list img {
+.presentation-actual {
+  margin-right: 15px;
+  margin-left: 15px;
+  background-color: #D79D23;
+  padding: 3px;
+}
+.presentation-actual h3 {
+  margin-top: 10px;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: bold;
+
+}
+.music-actual {
+  padding-top: 15px;
+}
+.separation {
+  clear: both;
+}
+.separation hr {
+  border: 3px solid #D79D23;
+  margin: 0 15px 5px;
+}
+
+.music-list {
+  overflow: scroll;
+  height: 430px;
+  float: left;
+}
+
+.music-list img, .music-actual img {
   float: left;
   border-radius: 3px;
   margin-bottom: 10px;
@@ -175,12 +215,12 @@
 }
 
 
-.music-list h3 {
+.music-list h3, .music-actual h3 {
   margin-top: 7px;
   font-size: 14px;
 }
 
-.music-list h4 {
+.music-list h4, .music-actual h4 {
   font-size: 12px;
   font-weight: lighter;
 }

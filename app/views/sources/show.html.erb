@@ -1,42 +1,7 @@
-<%= render partial: "navbar" %>
+<%= render partial: "sources/navbar" %>
 
-
-<div class="container-fluid">
-  <div class="row">
-
-    <div class="player" data-source-id="<%= @source.id %>">
-      <div class="col-sm-7">
-        <div class="embed-responsive embed-responsive-16by9">
-          <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
-        </div>
-
-        <div class="text-center share-area">
-          <h2 class="share-text-h2">
-            Vibe In est gratuit et sans publicité.
-          </h2>
-          <h3 class="share-text-h3">
-            Soutenez-nous en partageant vos coups de coeur, sur les réseaux sociaux.
-          </h3>
-          <div class="fb-like" data-href="http://vibein.herokuapp.com/sources/<%= @source.id %>/public" data-width="400" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
-          </div>
-          <h4 class="share-text-h4">
-            Pour profiter d'internet sans publicité, installer <a href="https://adblockplus.org/"><u>Adblock</u></a>.</br>
-            Et pour sauvegarder vos morceaux préférés rapidement, installer notre <a href=""><u>Extension</u></a>.
-          </h4>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-sm-5">
-      <div class="row">
-        <div class="music-list">
-          <div id="musics_aside">
-            <%= render partial: "sources/musics_aside", locals: {sources: @sources} %>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
+<% if params[:friend_id] == nil %>
+ <%= render partial: "sources/show/show_classic" %>
+<% else %>
+  <%= render partial: "sources/show/show_friend" %>
+<% end %>
