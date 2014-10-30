@@ -89,7 +89,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h3 class="modal-title text-center" id="myModalLabel">Gérer vos playlists</h3>
+          <h3 class="modal-title-site text-center" id="myModalLabel">Garage à playlists</h3>
         </div>
         <div class="modal-body">
 
@@ -97,8 +97,8 @@
           <% @category = Category.new %>
           <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
             <li>
-              <%= link_to category.title, category_path(id: category.id), :class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
-              <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category", data: {confirm: "Are you sure you  want to delete this playlist ?"} do %>
+              <%= link_to category.title, '#',:class => "btn btn-sm btn-category color-#{category.thumbnail}" %>
+              <%= link_to category_path(id: category.id), method: :delete, :class => "delete-category", data: {confirm: "Êtes-vous certain de vouloir supprimer cette playlist ?"} do %>
                 <i class="fa fa-times"></i>
               <% end %>
             </li>
@@ -110,12 +110,11 @@
           <ul class="list-unstyled">
             <%= form_for @category do |f| %>
 
-            <h4>Choisir un titre</h4>
             <li>
-              <%= f.text_field :title %>
+              <%= f.text_field :title, class: "form-control input", placeholder: "Choisir un titre chanmé" %>
             </li></br>
 
-            <h4>Choir une couleur</h4>
+            <h4>Choisir une couleur</h4>
 
             <li>
               <%= f.radio_button :thumbnail, "1DD2AF" %>
@@ -137,13 +136,10 @@
               <%= f.radio_button :thumbnail, "EA6153" %>
               <%= label "", nil, class: "color-selector color-EA6153" %>
             </li>
-
           </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= f.submit "Let's go !", :class => "btn btn-default" %>
-          <% end %>
+
+              <%= f.submit "Valider", :class => "btn btn-block btn-lg btn-success" %>
+            <% end %>
         </div>
       </div>
     </div>

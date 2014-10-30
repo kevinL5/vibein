@@ -2,16 +2,19 @@ var currentPage = 1;
 var intervalID = -1000;
 
 function checkScroll() {
-if (nearBottomOfPage()) {
-currentPage++;
-console.log("endless request "+ currentPage);
-jQuery.ajax('?page=' + currentPage, {asynchronous:true, evalScripts:true, method:'get', success: function(data, textStatus, jqXHR) {
-$('.ressources').append(jQuery(data).find('.ressources').html());
-if(typeof jQuery(data).find('.ressources').html() == 'undefined' || jQuery(data).find('.ressources').html().trim().length == 0){
-clearInterval(intervalID);
-}
-},});
-}
+  if (nearBottomOfPage()) {
+    currentPage++;
+    console.log("endless request "+ currentPage);
+    jQuery.ajax('?page=' + currentPage, {asynchronous:true, evalScripts:true, method:'get', success: function(data, textStatus, jqXHR) {
+    $('.ressources').append(jQuery(data).find('.ressources').html());
+    if(typeof jQuery(data).find('.ressources').html() == 'undefined' || jQuery(data).find('.ressources').html().trim().length == 0){
+    clearInterval(intervalID);
+    }
+    },
+    beforeSend:function() {$('.loading').removeClass('hidden'); },
+    complete:function() {$('.loading').addClass('hidden'); }
+    });
+  }
 }
 
 function nearBottomOfPage() {
@@ -27,5 +30,8 @@ return Math.max(document.body.scrollHeight, document.body.offsetHeight);
 }
 
 $('document').ready(function(){
-intervalID = setInterval(checkScroll, 1500);
+  if($('#musics_aside').length == 0){
+    intervalID = setInterval(checkScroll, 1500);
+  }
+
 })

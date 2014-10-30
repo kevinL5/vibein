@@ -5,8 +5,8 @@
   <div class="vertical-spacer"></div>
 
   <div class="container">
-    <div class="music-table">
 
+    <div class="music-table">
       <% if @musics.length == 0 %>
         <%= render partial: "music_start" %>
       <% else %>
@@ -14,7 +14,15 @@
           <%= render partial: "music_container" %>
         </div>
       <% end %>
-
     </div>
+
+    <div class="loading">
+      <div class="col-sm-12">
+        <div class="text-center btn-loading">
+          <btn>LOADING MORE VIBES</btn>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

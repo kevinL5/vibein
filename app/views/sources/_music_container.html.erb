@@ -1,15 +1,16 @@
 <% @sources.each_slice(2) do |source| %>
-      <div class="row">
-        <% (0..1).each do |i| %>
-          <% if source[i] %>
-            <div id="musicsaside">
-              <% if params[:friend_id] == nil %>
-                <%= render partial: "sources/music_box", locals: {source: source[i]} %>
-              <% else %>
-                  <%= render partial: "sources/music_box_friend", locals: {source: source[i]} %>
-              <% end %>
-            </div>
+  <div class="row">
+    <% (0..1).each do |i| %>
+      <% if source[i] %>
+        <div id="musicsaside">
+          <% if params[:friend_id] == nil %>
+            <%= render partial: "sources/music_box", locals: {source: source[i]} %>
+          <% else %>
+              <%= render partial: "sources/music_box_friend", locals: {source: source[i]} %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     <% end %>
+  </div>
+<% end %>
+

@@ -106,6 +106,16 @@
   display: none;
 }
 
+.btn-loading{
+  margin: 5px -20px 0;
+  padding: 10px 0 25px;
+  background-color: #FFF;
+  color: #BFBFBF;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 2px;
+}
 
 /* Modal */
 
@@ -223,4 +233,34 @@
 .music-list h4, .music-actual h4 {
   font-size: 12px;
   font-weight: lighter;
+}
+
+.aside-pagination {
+  cursor: default;
+}
+.aside-pagination a, .aside-pagination span, .aside-pagination em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: left;
+  margin-right: 1px;
+}
+.aside-pagination .disabled {
+  color: #999999;
+  border: 1px solid #dddddd;
+}
+.aside-pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background: #2e6ab1;
+  color: white;
+  border: 1px solid #2e6ab1;
+}
+.aside-pagination a {
+  text-decoration: none;
+  color: #105cb6;
+  border: 1px solid #9aafe5;
+}
+.aside-pagination a:hover, .aside-pagination a:focus {
+  color: #000033;
+  border-color: #000033;
 }

@@ -61,7 +61,6 @@ class SourcesController < ApplicationController
             @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
           end
         end
-
       end
 
     end
@@ -109,7 +108,7 @@ class SourcesController < ApplicationController
           format.js { render "sources/musics_aside_friend" }
         end
       else
-        @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 20)
+        @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 4)
 
         respond_with do |format|
           format.html

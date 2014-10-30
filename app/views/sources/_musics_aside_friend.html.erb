@@ -51,4 +51,6 @@
 
 </ul>
 
-<%= will_paginate @musics %>
+<div class="text-center aside-pagination">
+  <%= will_paginate @musics, :page_links => false %>
+</div>
