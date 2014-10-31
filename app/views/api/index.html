@@ -10,8 +10,8 @@
           <%= image_tag @source.picture.url(:medium), width: "100%", class: 'music-image' %>
       </div>
       <div class="col-xs-8">
-        <h3 class="api-title">
-          <%= truncate(@source.title, length: 50, separator: ' ') %>
+        <h3>
+          <%= truncate(@source.title, length: 50, separator: ' ', :class => 'api-title') %>
           <%= link_to music_path(@source.id), method: :delete, :class => 'delete-song' do %>
             <i class="fa fa-times"></i>
           <% end %>
@@ -43,6 +43,6 @@
     </div>
   </div>
 
-  <h2 class="text-center api-success">Votre morceau a été <span>ajouté avec succès</span>. Ajouter le maintenant à vos playlists.</h2>
+  <h2 class="text-center api-success">Votre morceau a été <span>ajouté avec succès</span>. Metter le maintenant dans vos playlists.</h2>
 
 </div>

@@ -86,7 +86,12 @@ class SourcesController < ApplicationController
           format.js { render "musics_aside" }
         end
       else
-        @musics = @user.musics
+        @musics = @user.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
+
+        respond_with do |format|
+          format.html
+          format.js
+        end
       end
 
     else
@@ -108,7 +113,7 @@ class SourcesController < ApplicationController
           format.js { render "sources/musics_aside_friend" }
         end
       else
-        @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 4)
+        @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
 
         respond_with do |format|
           format.html
@@ -123,10 +128,13 @@ class SourcesController < ApplicationController
     @source = Source.new
     @url = params[:url]
 
+
     if @url[/^(?:https?:\/\/)?(?:www\.)?youtu(?:\.be|be\.com)\/(?:watch\?v=)?([\w-]{10,})/]
       create_youtube
     elsif @url[/^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/]
       create_soundcloud
+    elsif @url[/^(?:https?:\/\/)?(?:www\.)?vibein.co\/(.*)$/]
+      create_vibein
     end
 
     redirect_to(:back)
@@ -182,6 +190,11 @@ class SourcesController < ApplicationController
     end
 
     music_create
+  end
+
+  def create_vibein
+    source_add = @url[/\d+$/]
+    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => source_add })
   end
 
   def time(duration)

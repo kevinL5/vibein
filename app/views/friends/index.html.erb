@@ -26,8 +26,8 @@
               </div>
 
 
-              <li class="text-center"><h3 class="api-title">
-                <%= link_to truncate(friend.sources.last.title, length: 30, separator: ' '), friend_source_path(fb_friend.id, friend.sources.last.id) %>
+              <li class="text-center"><h3>
+                <%= link_to truncate(friend.sources.last.title, length: 30, separator: ' '), friend_source_path(fb_friend.id, friend.sources.last.id), :class => 'api-title' %>
               </h3></li>
 
               <li class="text-center"><h4 class="api-time">

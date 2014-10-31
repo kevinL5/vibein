@@ -7,7 +7,7 @@ class ApiController < ApplicationController
 
     create
 
-    @source = Source.last
+    @source = Source.where(:id => Music.last.source_id).first
   end
 
   def create
@@ -16,11 +16,13 @@ class ApiController < ApplicationController
       create_youtube
     elsif @url[/^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/]
       create_soundcloud
+    elsif @url[/^(?:https?:\/\/)?(?:www\.)?localhost:3000\/(.*)$/]
+      create_vibein
     end
 
   end
 
-  private
+    private
 
   def create_youtube
     video = VideoInfo.new(params[:url])
@@ -72,6 +74,11 @@ class ApiController < ApplicationController
     music_create
   end
 
+  def create_vibein
+    @source_add = @url[/\d+$/]
+    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source_add.to_i })
+  end
+
   def time(duration)
     if duration.divmod(60)[1].to_s.length == 1
       sec = "0#{duration.divmod(60)[1]}"
@@ -96,7 +103,4 @@ class ApiController < ApplicationController
     Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
   end
 
-  def source_params
-    params.require(:source).permit(:provider, :identification, :title, :uploader, :duration, :uploaded, :picture)
-  end
 end

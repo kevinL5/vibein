@@ -8,8 +8,8 @@
         <% end %>
       </div>
       <div class="col-xs-8">
-        <h3 class="music-title">
-          <%= link_to truncate(friend.sources.last.title, length: 50, separator: ' '), friend.sources.last %>
+        <h3>
+          <%= link_to truncate(friend.sources.last.title, length: 50, separator: ' '), friend.sources.last, :class => 'music-title' %>
         </h3>
 
         <ul class="list-unstyle list-inline">

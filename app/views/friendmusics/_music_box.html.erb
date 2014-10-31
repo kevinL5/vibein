@@ -13,11 +13,11 @@
         <% end %>
       </div>
       <div class="col-xs-8">
-        <h3 class="music-title">
+        <h3>
           <% if params[:category_id] == nil %>
-            <%= link_to truncate(source.title, length: 50, separator: ' '), friend_friendmusic_path(@friend_id, source.id) %>
+            <%= link_to truncate(source.title, length: 50, separator: ' '), friend_friendmusic_path(@friend_id, source.id), :class => 'music-title' %>
           <% else %>
-            <%= link_to truncate(source.title, length: 50, separator: ' '), friend_category_friendmusic_path(@friend_id, params[:category_id], source.id) %>
+            <%= link_to truncate(source.title, length: 50, separator: ' '), friend_category_friendmusic_path(@friend_id, params[:category_id], source.id), :class => 'music-title' %>
           <% end %>
         </h3>
 

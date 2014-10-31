@@ -8,6 +8,13 @@
             <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
           </div>
 
+
+          <div class="back-friend">
+            <%= link_to friend_sources_path(params[:friend_id]) do %>
+              <i class="fa fa-backward"></i>
+            <% end %>
+          </div>
+
           <div class="text-center">
             <div id="addbutton">
               <%= render partial: "sources/show/addbutton" %>
@@ -64,7 +71,7 @@
 
             <div class="music-list">
               <div id="musics_aside">
-                <%= render partial: "sources/musics_aside_friend", locals: {sources: @sources, friend: @friend_id} %>
+                <%= render partial: "sources/musics_aside", locals: {sources: @sources, friend: @friend_id} %>
               </div>
 
             </div>

@@ -226,6 +226,9 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+.navbar-nav > li > a:hover {
+  background-color: #D79D23;
+}
 .search-box {
   float: right;
   height: 48px;

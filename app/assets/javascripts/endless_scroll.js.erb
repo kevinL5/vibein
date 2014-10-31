@@ -18,7 +18,7 @@ function checkScroll() {
 }
 
 function nearBottomOfPage() {
-return scrollDistanceFromBottom() < 50;
+return scrollDistanceFromBottom() < 100;
 }
 
 function scrollDistanceFromBottom(argument) {
@@ -30,7 +30,7 @@ return Math.max(document.body.scrollHeight, document.body.offsetHeight);
 }
 
 $('document').ready(function(){
-  if($('#musics_aside').length == 0){
+  if($('#infinite-scroll').length != 0){
     intervalID = setInterval(checkScroll, 1500);
   }
 
