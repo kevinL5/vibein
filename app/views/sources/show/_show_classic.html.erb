@@ -8,20 +8,41 @@
             <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
           </div>
 
-          <div class="text-center share-area">
-            <h2 class="share-text-h2">
-              Vibe In est gratuit et sans publicité.
-            </h2>
-            <h3 class="share-text-h3">
-              Soutenez-nous en partageant vos coups de coeur, sur les réseaux sociaux.
-            </h3>
-            <div class="fb-like" data-href="http://vibein.herokuapp.com/sources/<%= @source.id %>/public" data-width="400" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
+          <div class="share-area-classic">
+            <div class="row">
+              <div class="col-xs-12">
+                <h2 class="text-center share-text-h2">
+                  VIBE IN EST GRATUIT ET SANS PUBLICITÉ
+                </h2>
+                <hr class="hr-share-area">
+                <div class="col-xs-9">
+                  <h3 class="share-text-h3">
+                    SOUTENEZ-NOUS EN PARTAGEANT
+                  </h3>
+                </div>
+
+                <div class="col-xs-3">
+                  <div class="text-center fb-like">
+                    <div class="fb-like" data-href="http://vibein.herokuapp.com/sources/<%= @source.id %>/public" data-width="400" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h4 class="share-text-h4">
-              Pour profiter d'internet sans publicité, installer <a href="https://adblockplus.org/"><u>Adblock</u></a>.</br>
-              Et pour sauvegarder vos morceaux préférés rapidement, installer notre <a href=""><u>Extension</u></a>.
-            </h4>
           </div>
+
+          <div class="share-area">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 class="text-center share-text-h4">
+                  Pour profiter d'internet sans publicité, installer <a href="https://adblockplus.org/">Adblock Plus</a>.</br>
+                  Et pour sauvegarder vos morceaux préférés rapidement, installer notre <%= link_to "Extension", bookmarklets_path %></a>.
+                </h4>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
 

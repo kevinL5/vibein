@@ -3,11 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .btn-friend-song {
-  margin-top: 10px;
-  background-color: #FFF;
-  border-color: rgb(252, 98, 34);
+  position: relative;
+  color: #757575;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  display: block;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease 0s;
 }
-
-.share-text-top {
-  padding-top: 15px;
+.btn-friend-song:hover {
+  color: rgb(252, 98, 34);
 }

@@ -36,7 +36,7 @@ class ApiController < ApplicationController
       @source.duration = video.duration
       @source.uploaded = video.date
       @source.picture = video.thumbnail_large
-      @source.url = video.embed_url
+      @source.url = "https:" + video.embed_url
       @source.time = time(@source.duration)
 
       @source.save

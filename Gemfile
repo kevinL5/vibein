@@ -11,7 +11,7 @@ gem 'devise'
 gem 'figaro', '~> 1.0.0.rc1'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem "koala"
+gem 'koala'
 gem 'omniauth-facebook'
 gem 'paperclip'
 gem 'pg'
