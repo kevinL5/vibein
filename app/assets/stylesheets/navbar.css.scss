@@ -62,6 +62,8 @@
 }
 .megamenu .megamenu-content {
   padding: 20px 30px;
+  height: 500px;
+  overflow: scroll;
  *zoom: 1;
 }
 .megamenu .megamenu-content:before, .megamenu .megamenu-content:after {
