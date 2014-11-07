@@ -127,9 +127,9 @@
   margin-bottom: 5px;
   padding-bottom: 5px;
 }
-.megamenu-content ul li a {
+/* .megamenu-content ul li a {
   font-size: 12px;
-}
+} */
 .itemInMenu {
   margin-bottom: 0 !important;
 }
@@ -207,9 +207,9 @@
  -moz-transition: all 0.2s ease 0s;
  -ms-transition: all 0.2s ease 0s;
  -o-transition: all 0.2s ease 0s;
- display: block;
+ /* display: block; */
 }
-.megamenu-content ul li a:hover {
+.megamenu-content ul li a img:hover {
  padding-left: 5px;
 }
 .megamenu-content ul li.productPopItem a:hover, .megamenu-content ul li a.newProductMenuBlock:hover {

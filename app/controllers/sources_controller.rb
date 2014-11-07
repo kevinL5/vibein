@@ -5,8 +5,11 @@ class SourcesController < ApplicationController
   require 'will_paginate/array'
 
   def index
+    @user = current_user
     @source = Source.new
     @category = Category.new
+
+    show_friends
 
     if params[:friend_id] == nil
       @user = current_user
@@ -58,7 +61,7 @@ class SourcesController < ApplicationController
             sources = @friend.sources.basic_search(title: params[:search])
             @sources = @friend.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
           else
-            @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+            @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
           end
         end
       end
@@ -70,6 +73,8 @@ class SourcesController < ApplicationController
   def show
     @user = current_user
     @source = Source.find(params[:id])
+
+    show_friends
 
     if params[:friend_id] == nil
 
@@ -219,6 +224,21 @@ class SourcesController < ApplicationController
 
   def music_create
     Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
+  end
+
+  def show_friends
+    @friends = @user.friends
+
+    if @user.provider == 'facebook'
+      graph = Koala::Facebook::API.new(@user.token)
+      @fb_friends = graph.get_connections("me", "friends")
+
+      @fb_friends.each do |fb_friend|
+        if @friends.where(:friend_uid => fb_friend["id"]).first == nil
+          Friend.create(friend_uid: fb_friend["id"], user_id: @user.id.to_i)
+        end
+      end
+    end
   end
 
 end

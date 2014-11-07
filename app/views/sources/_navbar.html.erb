@@ -35,7 +35,42 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="active"> <%= link_to "Home", sources_path %> </li>
-        <li class="active"> <%= link_to "Friends", friends_path %> </li>
+
+        <!-- change width of megamenu = use class > megamenu-fullwidth, megamenu-60width, megamenu-40width -->
+        <li class="dropdown megamenu-40width "> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> FRIENDS <b class="active caret"> </b> </a>
+          <ul class="dropdown-menu">
+            <li class="megamenu-content">
+
+              <!-- megamenu-content -->
+               <ul class="list-unstyled list-inline"><% @friends.each do |fb_friend| %>
+                <% friend = User.where(:uid => fb_friend.friend_uid).first %>
+                <% if friend != nil && friend.sources.length > 1 %>
+
+                  <div class="col-xs-12">
+                    <div class="friend-box">
+                      <li class="friend-infos"><%= link_to friend_sources_path(fb_friend.id) do %>
+                        <%= image_tag friend.picture, class: 'photo-fb' %>
+                      <% end %>
+                      <%= link_to friend.name, friend_sources_path(fb_friend.id), class: 'name-fb' %></li>
+
+                      <li class="text-center"><h4 class="api-time">
+                        <%= friend.musics.length %> morceaux de musique
+                        <% if friend.categories.length > 1 %>
+                          <p>et <% friend.categories.length %> playlists.</p>
+                        <% end %>
+                      </h4></li>
+
+                    </div>
+                  </div>
+
+                <% end %>
+              <% end %>
+              </ul>
+
+          </ul>
+        </li>
+
+
         <% if params[:friend_id] != nil && @source.id != nil %>
           <li class="active"> <%= link_to @friend.name, friend_sources_path(params[:friend_id]) %> </li>
         <% end %>

@@ -79,7 +79,7 @@
         <% end %>
 
     <% else %>
-      <% Categorization.where(:category_id => params[:category_id]).map(&:music).sort_by { |h| h[:id] }.each do |music| %>
+      <% Categorization.where(:category_id => params[:category_id]).map(&:music).each do |music| %>
       <li>
         <div class="col-sm-12">
           <div class="row">

@@ -16,8 +16,6 @@ class FriendsController < ApplicationController
         end
       end
     end
-
-    @friends = @user.friends
   end
 
 end
