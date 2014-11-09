@@ -297,3 +297,47 @@
   color: #FFF;
   border: 2px solid #757575;
 }
+
+
+/* Button "I Like this song" - Friend/Show */
+
+.btn-friend-song {
+position: relative;
+color: #757575;
+font-size: 1.5em;
+text-transform: uppercase;
+display: block;
+font-weight: bold;
+padding-top: 10px;
+padding-bottom: 10px;
+text-align: center;
+transition: background-color 0.3s ease 0s;
+}
+.btn-friend-song:hover {
+color: rgb(252, 98, 34);
+}
+
+
+/* Friends - Navbar */
+
+.friend-box {
+margin-top: 10px;
+padding: 10px 10px;
+background-color: rgba(255, 255, 255, 0.7);
+border: 0.5px solid rgba(230, 230, 230, 0.5);
+box-shadow: 1px 1px 10px #E6E6E6;
+}
+.photo-fb{
+border-radius: 5px;
+}
+.name-fb {
+font-family: 'Quicksans', sans-serif;
+font-size: 18px;
+line-height: 25px;
+margin-left: 5px;
+color: #6F676C;
+}
+.name-fb:hover {
+color: #454043;
+}
+

@@ -67,9 +67,8 @@
           </ul>
         </li>
 
-
         <% if params[:friend_id] != nil && @source.id != nil %>
-          <li class="active"> <%= link_to @friend.name, friend_sources_path(params[:friend_id]) %> </li>
+          <li class="active"> <%= link_to @friend.first_name, friend_sources_path(params[:friend_id]) %> </li>
         <% end %>
       </ul>
 

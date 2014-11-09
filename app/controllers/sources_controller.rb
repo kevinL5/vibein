@@ -9,63 +9,38 @@ class SourcesController < ApplicationController
     @source = Source.new
     @category = Category.new
 
-    show_friends
+    show_friends #Check if user have new friends who joined Vibe in - display in navbar
 
-    if params[:friend_id] == nil
+    if params[:friend_id] == nil #User request for his own musics
       @user = current_user
       @musics = @user.musics
       @search_js = params[:search]
 
       if params[:category_id] == nil
-
-        if params[:search] && params[:search].length >= 1
-          sources = @user.sources.basic_search(title: params[:search])
-          @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
-        else
-          @sources = @user.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
-        end
-
+        @sources = @user.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
       else
         category = Category.find(params[:category_id])
 
         if category.user_id == @user.id
-          if params[:search] && params[:search].length >= 1
-            sources = @user.sources.basic_search(title: params[:search])
-            @sources = @user.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
-          else
-            @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
-          end
+          @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
         end
       end
 
-    else
+    else #User request for his friend's musics
       friend_uid = Friend.find(params[:friend_id]).friend_uid
       @friend_id = Friend.find(params[:friend_id]).id
       @friend = User.where(:uid => friend_uid).first
       @musics = @friend.musics
 
       if params[:category_id] == nil
-
-        if params[:search] && params[:search].length >= 1
-          sources = @friend.sources.basic_search(title: params[:search])
-          @sources = @friend.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
-        else
-          @sources = @friend.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
-        end
-
+        @sources = @friend.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
       else
         category = Category.find(params[:category_id])
 
         if category.user_id == @friend.id
-          if params[:search] && params[:search].length >= 1
-            sources = @friend.sources.basic_search(title: params[:search])
-            @sources = @friend.musics.where(source_id: sources.map(&:id)).order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 30)
-          else
-            @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
-          end
+          @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
         end
       end
-
     end
 
   end
@@ -74,58 +49,30 @@ class SourcesController < ApplicationController
     @user = current_user
     @source = Source.find(params[:id])
 
-    show_friends
+    show_friends #Check if user have new friends who joined Vibe in - display in navbar
 
-    if params[:friend_id] == nil
+    if params[:friend_id] == nil #User request to play a music from his playlist
+      @musics = @user.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
 
-      if params[:search]
-        if params[:search].length >= 1
-          sources = @user.sources.basic_search(title: params[:search])
-          @musics = @user.musics.where(source_id: sources.map(&:id))
-        else
-          @musics = @user.musics
-        end
-
-        respond_with do |format|
-          format.html { redirect_to source_path(@source.id) }
-          format.js { render "musics_aside" }
-        end
-      else
-        @musics = @user.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
-
-        respond_with do |format|
-          format.html
-          format.js
-        end
+      respond_with do |format|
+        format.html
+        format.js
       end
 
-    else
+    else #User request to play a music from his friend's playlist
       friend_uid = Friend.find(params[:friend_id]).friend_uid
       @friend_id = Friend.find(params[:friend_id]).id
       @friend = User.where(:uid => friend_uid).first
       @source = Source.find(params[:id])
 
-      if params[:search]
-        if params[:search].length >= 1
-          sources = @friend.sources.basic_search(title: params[:search])
-          @musics = @friend.musics.where(source_id: sources.map(&:id))
-        else
-          @musics = @friend.musics.map(&:source)
-        end
+      @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
 
-        respond_with do |format|
-          format.html { redirect_to source_path(@source.id) }
-          format.js { render "sources/musics_aside_friend" }
-        end
-      else
-        @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
-
-        respond_with do |format|
-          format.html
-          format.js
-        end
+      respond_with do |format|
+        format.html
+        format.js
       end
     end
+    #Category (= params[:category_id]) will be check in the view - BAD !
 
   end
 
@@ -138,7 +85,7 @@ class SourcesController < ApplicationController
       create_youtube
     elsif @url[/^https?:\/\/(soundcloud.com|snd.sc)\/(.*)$/]
       create_soundcloud
-    elsif @url[/^(?:https?:\/\/)?(?:www\.)?vibein.co\/(.*)$/]
+    elsif @url[/^(?:https?:\/\/)?(?:www\.)?vibein.co\/(.*)$/] #When the music come from vibein.co
       create_vibein
     end
 
@@ -198,11 +145,11 @@ class SourcesController < ApplicationController
   end
 
   def create_vibein
-    source_add = @url[/\d+$/]
+    source_add = @url[/\d+$/] #Extract the last numbers of the url who are the source ID
     Music.create({:favorite => :false, :user_id => current_user.id, :source_id => source_add })
   end
 
-  def time(duration)
+  def time(duration) #Transform the duration (in seconds) in HH:MM:SS timestamp
     if duration.divmod(60)[1].to_s.length == 1
       sec = "0#{duration.divmod(60)[1]}"
     else
@@ -233,7 +180,7 @@ class SourcesController < ApplicationController
       graph = Koala::Facebook::API.new(@user.token)
       @fb_friends = graph.get_connections("me", "friends")
 
-      @fb_friends.each do |fb_friend|
+      @fb_friends.each do |fb_friend| #Check if the user have new friends
         if @friends.where(:friend_uid => fb_friend["id"]).first == nil
           Friend.create(friend_uid: fb_friend["id"], user_id: @user.id.to_i)
         end

@@ -8,42 +8,11 @@
             <%= render "sources/providers/#{@source.provider.downcase}", source: @source %>
           </div>
 
-          <div class="text-center">
-            <div id="addbutton">
-              <%= render partial: "sources/show/addbutton" %>
-            </div>
-          </div>
-
-
-          <div class="share-area">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="col-xs-9">
-                  <h3 class="share-text-h3">
-                    SOUTENEZ-NOUS EN PARTAGEANT
-                  </h3>
-                </div>
-
-                <div class="col-xs-3">
-                  <div class="text-center fb-like">
-                    <div class="fb-like" data-href="http://vibein.herokuapp.com/sources/<%= @source.id %>/public" data-width="400" data-layout="button" data-action="like" data-show-faces="false" data-share="true">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="share-area">
-            <div class="row">
-              <div class="col-xs-12">
-                <h4 class="text-center share-text-h4">
-                  Pour profiter d'internet sans publicité, installer <a href="https://adblockplus.org/">Adblock Plus</a>.</br>
-                  Et pour sauvegarder vos morceaux préférés rapidement, installer notre <%= link_to "Extension", bookmarklets_path %></a>.
-                </h4>
-              </div>
-            </div>
-          </div>
+          <% if @user.musics.where(:source_id => @source.id).first == nil %>
+            <%= render partial: "sources/show/share_area_button" %>
+          <% else %>
+            <%= render partial: "sources/show/share_area" %>
+          <% end %>
 
         </div>
       </div>

@@ -20,8 +20,6 @@
 //= require categorizations
 //= require endless_scroll
 //= require facebook
-//= require friendmusics
-//= require friends
 //= require musics
 //= require navbar
 //= require pagination
