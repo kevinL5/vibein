@@ -1,3 +1,4 @@
+<!--
 <h2>Sign in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -15,3 +16,18 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+-->
+
+
+<img src=<%= asset_path('background.jpg') %> class="bg" alt="Background">
+
+<div id="nav-brand">
+  <h2>VIBE IN</h2>
+  <p>music embellishes the world</p>
+</div>
+
+
+<div class="fb-api">
+<%= link_to(image_tag("fb-connect.png", :alt => "Facebook Connection", :width => 190), omniauth_authorize_path(:user, :facebook)) %>
+</div>
+

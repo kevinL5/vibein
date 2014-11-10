@@ -79,7 +79,7 @@ class ApiController < ApplicationController
 
   def create_vibein
     @source_add = @url[/\d+$/]
-    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source_add.to_i })
+    Music.create({:favorite => :false, :playback => 1, :user_id => current_user.id, :source_id => @source_add.to_i })
   end
 
   def time(duration)
@@ -103,7 +103,7 @@ class ApiController < ApplicationController
   end
 
   def music_create
-    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
+    Music.create({:favorite => :false, :playback => 1, :user_id => current_user.id, :source_id => @source.id })
   end
 
   def show_friends

@@ -59,6 +59,8 @@ class SourcesController < ApplicationController
         format.js
       end
 
+      playback_music #Increment the playback of the music
+
     else #User request to play a music from his friend's playlist
       friend_uid = Friend.find(params[:friend_id]).friend_uid
       @friend_id = Friend.find(params[:friend_id]).id
@@ -146,7 +148,7 @@ class SourcesController < ApplicationController
 
   def create_vibein
     source_add = @url[/\d+$/] #Extract the last numbers of the url who are the source ID
-    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => source_add })
+    Music.create({:favorite => :false, :playback => 1, :user_id => current_user.id, :source_id => source_add })
   end
 
   def time(duration) #Transform the duration (in seconds) in HH:MM:SS timestamp
@@ -170,7 +172,7 @@ class SourcesController < ApplicationController
   end
 
   def music_create
-    Music.create({:favorite => :false, :user_id => current_user.id, :source_id => @source.id })
+    Music.create({:favorite => :false, :playback => 1, :user_id => current_user.id, :source_id => @source.id })
   end
 
   def show_friends
@@ -185,6 +187,15 @@ class SourcesController < ApplicationController
           Friend.create(friend_uid: fb_friend["id"], user_id: @user.id.to_i)
         end
       end
+    end
+  end
+
+  def playback_music
+    music = Music.where(:source_id => @source.id).where(:user_id => @user.id).first
+
+    if Time.now - music.updated_at > 3600 #Not increment the playback if the user already played this music in the last hour
+      futur_playback = music.playback += 1
+      music.update(:playback => futur_playback)
     end
   end
 
