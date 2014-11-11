@@ -9,7 +9,7 @@ class SourcesController < ApplicationController
     @source = Source.new
     @category = Category.new
 
-    #show_friends #Check if user have new friends who joined Vibe in - display in navbar
+    show_friends #Check if user have new friends who joined Vibe in - display in navbar
 
     if params[:friend_id] == nil #User request for his own musics
       @user = current_user
