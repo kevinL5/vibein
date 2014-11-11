@@ -1,1 +1,32 @@
-Hello world
+
+
+<div class="bg-grey">
+
+  <div class="vertical-spacer"></div>
+
+  <div class="container">
+
+
+      <% if @musics.length == 0 %>
+        <%= render partial: "music_start" %>
+      <% else %>
+        <div class="ressources music-table">
+          <%= render partial: "music_container" %>
+        </div>
+      <% end %>
+
+    <div class="loading">
+      <div class="col-sm-12">
+        <div class="text-center btn-loading">
+          <btn>LOADING MORE VIBES</btn>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="infinite-scroll"></div>
+
+
