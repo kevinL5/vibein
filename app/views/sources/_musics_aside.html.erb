@@ -108,5 +108,5 @@
 <% end %>
 
 <div class="text-center aside-pagination">
-  <%= will_paginate @musics, :page_links => false %>
+  <%= paginate @musics, :window => 0 %>
 </div>

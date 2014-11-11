@@ -2,7 +2,7 @@ class SourcesController < ApplicationController
   before_action :authenticate_user!
   respond_to :js
 
-  require 'will_paginate/array'
+
 
   def index
     @user = current_user
@@ -17,12 +17,12 @@ class SourcesController < ApplicationController
       @search_js = params[:search]
 
       if params[:category_id] == nil
-        @sources = @user.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+        @sources = Kaminari.paginate_array(@user.musics.order('id DESC').map(&:source)).page(params[:page]).per(12)
       else
         category = Category.find(params[:category_id])
 
         if category.user_id == @user.id
-          @sources = category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+          @sources = Kaminari.paginate_array(category.categorizations.map(&:music).sort_by { |h| -h[:id] }.map(&:source)).page(params[:page]).per(12)
         end
       end
 
@@ -33,12 +33,12 @@ class SourcesController < ApplicationController
       @musics = @friend.musics
 
       if params[:category_id] == nil
-        @sources = @friend.musics.order('id DESC').map(&:source).paginate(:page => params[:page], :per_page => 12)
+        @sources = Kaminari.paginate_array(@friend.musics.order('id DESC').map(&:source)).page(params[:page]).per(12)
       else
         category = Category.find(params[:category_id])
 
         if category.user_id == @friend.id
-          @sources = category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source).paginate(:page => params[:page], :per_page => 12)
+          @sources = Kaminari.paginate_array(category.categorizations.map(&:music).sort_by { |h| h[:id] }.map(&:source)).page(params[:page]).per(12)
         end
       end
     end
@@ -52,7 +52,7 @@ class SourcesController < ApplicationController
     show_friends #Check if user have new friends who joined Vibe in - display in navbar
 
     if params[:friend_id] == nil #User request to play a music from his playlist
-      @musics = @user.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
+      @musics = Kaminari.paginate_array(@user.musics.order('id DESC')).page(params[:page]).per(10)
 
       respond_with do |format|
         format.html
@@ -67,7 +67,7 @@ class SourcesController < ApplicationController
       @friend = User.where(:uid => friend_uid).first
       @source = Source.find(params[:id])
 
-      @musics = @friend.musics.order('id DESC').paginate(:page => params[:page], :per_page => 10)
+      @musics = Kaminari.paginate_array(@friend.musics.order('id DESC')).page(params[:page]).per(10)
 
       respond_with do |format|
         format.html
@@ -121,7 +121,7 @@ class SourcesController < ApplicationController
   end
 
   def create_soundcloud
-    client = Soundcloud.new(:client_id => '7eda384a44d761c3108c153a6f9daa85')
+    client = Soundcloud.new(:client_id => ENV['SOUDCLOUD_CLIENT_ID'])
     track = client.get('/resolve', :url => @url)
     new_source = Source.where(:identification => track.id.to_s).first
 

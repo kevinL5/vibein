@@ -52,7 +52,7 @@ class ApiController < ApplicationController
   end
 
   def create_soundcloud
-    client = Soundcloud.new(:client_id => '7eda384a44d761c3108c153a6f9daa85')
+    client = Soundcloud.new(:client_id => ENV['SOUDCLOUD_CLIENT_ID'])
     track = client.get('/resolve', :url => @url)
     new_source = Source.where(:identification => track.id.to_s).first
 

@@ -24,7 +24,7 @@ gem 'textacular', '~> 3.0'
 gem 'thin'
 gem 'uglifier', '>= 1.3.0'
 gem 'video_info'
-gem 'will_paginate', '~> 3.0'
+gem 'kaminari'
 
 group :development do
   gem "better_errors"
