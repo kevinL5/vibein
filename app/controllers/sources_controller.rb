@@ -17,7 +17,7 @@ class SourcesController < ApplicationController
       @search_js = params[:search]
 
       if params[:category_id] == nil
-        #@sources = Kaminari.paginate_array(@user.musics.order('id DESC').map(&:source)).page(params[:page]).per(12)
+        @sources = Kaminari.paginate_array(@user.musics.order('id DESC').map(&:source)).page(params[:page]).per(12)
       else
         category = Category.find(params[:category_id])
 
