@@ -8,10 +8,12 @@ role :app, %w{172.31.40.194}
 role :web, %w{172.31.40.194}
 role :db,  %w{172.31.40.194}
 
+set :stage, :production
+set :keep_releases, 1
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server '172.31.40.194', user: 'deploy', roles: %w{web app}
+server '172.31.40.194', user: 'deploy', roles: %w{web app}, password: 'Qkflgkrtod'
