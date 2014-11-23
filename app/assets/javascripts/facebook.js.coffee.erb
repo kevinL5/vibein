@@ -6,6 +6,7 @@ jQuery ->
     dataType: 'script'
     cache: true
 
+window.location.hash = ""  if window.location.hash and window.location.hash is "#_=_"
 
 window.fbAsyncInit = ->
   FB.init(appId: '<%= ENV["FACEBOOK_APP_ID"] %>', cookie: true)
