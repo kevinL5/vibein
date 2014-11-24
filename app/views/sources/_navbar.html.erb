@@ -108,7 +108,7 @@
   <div class="search-full text-right"> <a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
     <div class="searchInputBox pull-right">
       <%= form_for(@source) do |f| %>
-          <%= text_field_tag :url, '', :class => 'search-input', :placeholder => "Copier l'url d'un morceau Youtube ou Soundcloud" %>
+          <%= text_field_tag :url, '', :class => 'search-input', :placeholder => "Copier-coller l'adresse d'un morceau Youtube ou Soundcloud" %>
           <%= f.submit "", :class => 'btn-nobg search-btn' do %>
             <i class='fa fa-plus'>
           <% end %>
@@ -137,11 +137,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h3 class="modal-title-site text-center" id="myModalLabel">Garage à playlists</h3>
+          <p class="modal-title-site text-center" id="myModalLabel">Garage à playlists</p>
         </div>
         <div class="modal-body">
 
-          <h3>Vos playlists actuelles</h3>
+          <p class="title-modal">Vos playlists :</p>
           <% @category = Category.new %>
           <ul class="list-unstyled list-inline"><% current_user.categories.each do |category| %>
             <li>
@@ -153,17 +153,21 @@
           <% end %>
           </ul>
 
-          <h3>Créer une nouvelle playlist</h3>
+          <p class="title-modal">Créer une nouvelle playlist</p>
 
           <ul class="list-unstyled">
             <%= form_for @category do |f| %>
 
             <li>
-              <%= f.text_field :title, class: "form-control input", placeholder: "Choisir un titre chanmé" %>
+              <%= f.text_field :title, class: "form-control input", placeholder: "Choisir un titre" %>
             </li></br>
 
-            <h4>Choisir une couleur</h4>
+            <p class="subtitle-modal">Choisir une couleur</p>
 
+            <li>
+              <%= f.radio_button :thumbnail, "F1C40F", :checked => true %>
+              <%= label "", nil, class: "color-selector color-F1C40F" %>
+            </li>
             <li>
               <%= f.radio_button :thumbnail, "1DD2AF" %>
               <%= label "", nil, class: "color-selector color-1DD2AF" %>
@@ -175,10 +179,6 @@
             <li>
               <%= f.radio_button :thumbnail, "2E8DCC" %>
               <%= label "", nil, class: "color-selector color-2E8DCC" %>
-            </li>
-            <li>
-              <%= f.radio_button :thumbnail, "F1C40F" %>
-              <%= label "", nil, class: "color-selector color-F1C40F" %>
             </li>
             <li>
               <%= f.radio_button :thumbnail, "EA6153" %>

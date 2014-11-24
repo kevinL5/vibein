@@ -24,7 +24,7 @@
           <div class="row">
 
             <div class="presentation-actual">
-              <h3 class="text-center">Vous régalez vos oreilles avec :</h3>
+              <p class="text-center title-aside">Vous régalez vos oreilles avec :</p>
             </div>
 
             <div class="col-sm-12">
@@ -38,10 +38,12 @@
                 </div>
 
                 <div class="col-sm-8 col-md-7">
-                  <h3><%= link_to truncate(@source.title, length: 50, separator: ' '), friend_source_path(params[:friend_id], @source.id) %></h3>
-                  <h4>
+                  <p class="title-song actual-song">
+                    <%= link_to truncate(@source.title, length: 50, separator: ' '), friend_source_path(params[:friend_id], @source.id) %>
+                  </p>
+                  <p class="time-song">
                     <%= @source.time %>
-                  </h4>
+                  </p>
                 </div>
               </div>
             </div>

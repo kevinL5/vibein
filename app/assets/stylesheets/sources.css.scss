@@ -213,9 +213,9 @@
   margin-right: 15px;
   margin-left: 15px;
   background-color: #D79D23;
-  padding: 3px;
+  padding: 1px;
 }
-.presentation-actual h3 {
+.presentation-actual p {
   margin-top: 10px;
   color: #FFF;
   font-size: 14px;
@@ -245,20 +245,27 @@
   margin-left: 10px;
 }
 
-
-.music-list h3, .music-actual h3 {
+.title-song {
   margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
 }
+.actual-song {
+  margin-left: -8px;
+}
+.time-song {
+  font-size: 12px;
+  font-weight: lighter;
+  line-height: 1.1;
+}
+
 .music-list a, .music-actual a {
   color: #6F676C;
 }
 .music-list a:hover, .music-actual a:hover {
   color: #454043;
-}
-.music-list h4, .music-actual h4 {
-  font-size: 12px;
-  font-weight: lighter;
 }
 
 .aside-pagination {

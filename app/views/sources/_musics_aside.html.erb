@@ -14,15 +14,17 @@
               </div>
 
               <div class="col-sm-8 col-md-9">
-                <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %></h3>
-                <h4>
+                <p class="title-song">
+                  <%= link_to truncate(music.source.title, length: 50, separator: ' '), source_path(music.source) %>
+                </p>
+                <p class="time-song">
                   <%= music.source.time %>
-                </h4>
+                </p>
               </div>
             </div>
           </div>
         </li>
-        <% end %>
+      <% end %>
 
       <% else %>
         <% Categorization.where(:category_id => params[:category_id]).map(&:music).each do |music| %>
@@ -37,11 +39,13 @@
                 <% end %>
               </div>
 
-              <div class="col-sm-8 col-md-7">
-                <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), category_source_path(params[:category_id], music.source) %></h3>
-                <h4>
+              <div class="col-sm-8 col-md-9">
+                <p class="title-song">
+                  <%= link_to truncate(music.source.title, length: 50, separator: ' '), category_source_path(params[:category_id], music.source) %>
+                </p>
+                <p class="time-song">
                   <%= music.source.time %>
-                </h4>
+                </p>
               </div>
             </div>
           </div>
@@ -67,11 +71,13 @@
               <% end %>
             </div>
 
-            <div class="col-sm-8 col-md-7">
-              <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), friend_source_path(params[:friend_id], music.source.id) %></h3>
-              <h4>
+            <div class="col-sm-8 col-md-9">
+              <p class="title-song">
+                <%= link_to truncate(music.source.title, length: 50, separator: ' '), friend_source_path(params[:friend_id], music.source.id) %>
+              </p>
+              <p class="time-song">
                 <%= music.source.time %>
-              </h4>
+              </p>
             </div>
           </div>
         </div>
@@ -91,11 +97,13 @@
               <% end %>
             </div>
 
-            <div class="col-sm-8 col-md-7">
-              <h3><%= link_to truncate(music.source.title, length: 50, separator: ' '), friend_category_source_path(params[:friend_id], params[:category_id], music.source.id) %></h3>
-              <h4>
+            <div class="col-sm-8 col-md-9">
+              <p class="title-song">
+                <%= link_to truncate(music.source.title, length: 50, separator: ' '), friend_category_source_path(params[:friend_id], params[:category_id], music.source.id) %>
+              </p>
+              <p class="time-song">
                 <%= music.source.time %>
-              </h4>
+              </p>
             </div>
           </div>
         </div>
